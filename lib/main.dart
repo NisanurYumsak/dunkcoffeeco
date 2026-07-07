@@ -1,164 +1,110 @@
 import 'package:flutter/material.dart';
 import 'package:dunkcoffeeco/constants/colors.dart';
+import 'package:dunkcoffeeco/sections/hero_section.dart';
+import 'package:dunkcoffeeco/sections/menu_selection_section.dart';
+import 'package:dunkcoffeeco/sections/modern_rituals_section.dart';
+import 'package:dunkcoffeeco/sections/precision_demanding_section.dart';
+import 'package:dunkcoffeeco/sections/visit_us_section.dart'; 
+import 'package:dunkcoffeeco/sections/social_gallery_section.dart';
+import 'package:dunkcoffeeco/sections/footer_section.dart'; 
+import 'package:dunkcoffeeco/sections/full_menu_page.dart';
 
-class MenuSelectionSection extends StatelessWidget {
-  const MenuSelectionSection({super.key});
+void main() {
+  runApp(const DunkCoffeeApp());
+}
+
+class DunkCoffeeApp extends StatelessWidget {
+  const DunkCoffeeApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 60),
-      color: AppColors.lightBg,
-      child: Column(
-        children: [
-          const Text(
-            'ZANAAT & TAT',
-            style: TextStyle(color: AppColors.primaryRed, fontSize: 12, fontWeight: FontWeight.bold, letterSpacing: 2),
-          ),
-          const SizedBox(height: 10),
-          const Text(
-            'DUNK SEÇKİSİ',
-            style: TextStyle(color: AppColors.textDark, fontSize: 32, fontWeight: FontWeight.bold, letterSpacing: 1),
-          ),
-          const SizedBox(height: 40),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return MaterialApp(
+      title: 'Dunk Coffee Roasters',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        scaffoldBackgroundColor: AppColors.lightBg,
+      ),
+      home: const DunkMainPage(),
+    );
+  }
+}
+
+class DunkMainPage extends StatefulWidget {
+  const DunkMainPage({super.key});
+
+  @override
+  State<DunkMainPage> createState() => _DunkMainPageState();
+}
+
+class _DunkMainPageState extends State<DunkMainPage> {
+  int activePageIndex = 0; 
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(80),
+        child: Container(
+          color: AppColors.lightBg,
+          padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(
-                flex: 3,
-                child: Column(
-                  children: [
-                    _buildMenuCard(
-                      title: 'SICAK SERİSİ',
-                      titleColor: AppColors.primaryRed,
-                      bgColor: Colors.white,
-                      items: [
-                        {'name': 'FİLTRE KAHVE', 'price': '₺85'},
-                        {'name': 'TÜRK KAHVESİ', 'price': '₺80'},
-                        {'name': 'CORTADO', 'price': '₺95'},
-                        {'name': 'LATTE', 'price': '₺100'},
-                      ],
-                    ),
-                    const SizedBox(height: 30),
-                    _buildMenuCard(
-                      title: 'SOĞUK VE TAZE',
-                      titleColor: Colors.white,
-                      bgColor: AppColors.primaryRed,
-                      items: [
-                        {'name': 'NITRO SOĞUK DEMLEME', 'price': '₺110'},
-                        {'name': 'HIBISCUS TEA', 'price': '₺95'},
-                        {'name': 'FROZEN ESPRESSO', 'price': '₺120'},
-                      ],
-                    ),
-                  ],
+              InkWell(
+                onTap: () => setState(() => activePageIndex = 0),
+                child: const Text(
+                  'DUNK COFFEE',
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.primaryRed, letterSpacing: 1.5),
                 ),
               ),
-              const SizedBox(width: 30),
-              Expanded(
-                flex: 2,
-                child: Column(
-                  children: [
-                    _buildImageCard('KAVRUMLARIMIZ', 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=500'),
-                    const SizedBox(height: 30),
-                    _buildImageCard('GÜNLÜK LEZZETLER', 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=500'),
-                  ],
-                ),
+              Row(
+                children: [
+                  _buildNavButton(title: 'Ana Sayfa', index: 0),
+                  _buildNavButton(title: 'Menü', index: 1),
+                ],
+              ),
+              ElevatedButton(
+                onPressed: () => setState(() => activePageIndex = 1),
+                style: ElevatedButton.styleFrom(backgroundColor: AppColors.primaryRed, elevation: 0),
+                child: const Text('ŞİMDİ SİPARİŞ VER', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12)),
               ),
             ],
           ),
-        ],
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: activePageIndex == 0 
+            ? Column(
+                children: [
+                  HeroSection(),           
+                  MenuSelectionSection(),   
+                  ModernRitualsSection(),   
+                  PrecisionDemandingSection(),
+                  VisitUsSection(), 
+                  SocialGallerySection(),
+                  FooterSection(),
+                ],
+              )
+            : const FullMenuPage(),
       ),
     );
   }
 
-  Widget _buildMenuCard({required String title, required Color titleColor, required Color bgColor, required List<Map<String, String>> items}) {
-    bool isRedBg = bgColor == AppColors.primaryRed;
-    return Stack(
-      children: [
-        Transform.translate(
-          offset: const Offset(8, 8),
-          child: Container(
-            height: isRedBg ? 230 : 260,
-            decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.circular(24)),
+  Widget _buildNavButton({required String title, required int index}) {
+    bool isSelected = activePageIndex == index;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: InkWell(
+        onTap: () => setState(() => activePageIndex = index),
+        child: Text(
+          title,
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+            color: isSelected ? AppColors.primaryRed : AppColors.textDark,
           ),
         ),
-        Container(
-          height: isRedBg ? 230 : 260,
-          padding: const EdgeInsets.all(40),
-          decoration: BoxDecoration(
-            color: bgColor,
-            borderRadius: BorderRadius.circular(24),
-            border: Border.all(color: Colors.black, width: 1),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(title, style: TextStyle(color: titleColor, fontSize: 18, fontWeight: FontWeight.bold, letterSpacing: 0.5)),
-              const SizedBox(height: 10),
-              Divider(color: isRedBg ? Colors.white30 : Colors.black12, thickness: 1),
-              const SizedBox(height: 15),
-              Expanded(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: items.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(items[index]['name']!, style: TextStyle(color: isRedBg ? Colors.white : AppColors.textDark, fontSize: 14, fontWeight: FontWeight.bold)),
-                          Text(items[index]['price']!, style: TextStyle(color: isRedBg ? Colors.white70 : AppColors.primaryRed, fontSize: 14, fontWeight: FontWeight.bold)),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildImageCard(String title, String imageUrl) {
-    return Stack(
-      children: [
-        Transform.translate(
-          offset: const Offset(8, 8),
-          child: Container(
-            height: 245,
-            decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.circular(24)),
-          ),
-        ),
-        Container(
-          height: 245,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(24),
-            border: Border.all(color: Colors.black, width: 1),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.vertical(top: Radius.circular(23)),
-                    image: DecorationImage(image: NetworkImage(imageUrl), fit: BoxFit.cover),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: Text(title, style: const TextStyle(color: AppColors.textDark, fontSize: 14, fontWeight: FontWeight.bold, letterSpacing: 0.5)),
-              ),
-            ],
-          ),
-        ),
-      ],
+      ),
     );
   }
 }
