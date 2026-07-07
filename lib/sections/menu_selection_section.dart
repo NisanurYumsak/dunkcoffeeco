@@ -17,7 +17,7 @@ class MenuSelectionSection extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           const Text(
-            'DUNK SEÇKİSİ',
+            'DUNK SE├çK─░S─░',
             style: TextStyle(color: AppColors.textDark, fontSize: 32, fontWeight: FontWeight.bold, letterSpacing: 1),
           ),
           const SizedBox(height: 40),
@@ -29,25 +29,25 @@ class MenuSelectionSection extends StatelessWidget {
                 child: Column(
                   children: [
                     _buildMenuCard(
-                      title: 'SICAK SERİSİ',
+                      title: 'SICAK SER─░S─░',
                       titleColor: AppColors.primaryRed,
                       bgColor: Colors.white,
                       items: [
-                        {'name': 'FİLTRE KAHVE', 'price': '₺85'},
-                        {'name': 'TÜRK KAHVESİ', 'price': '₺80'},
-                        {'name': 'CORTADO', 'price': '₺95'},
-                        {'name': 'LATTE', 'price': '₺100'},
+                        {'name': 'F─░LTRE KAHVE', 'price': 'Ôé║85'},
+                        {'name': 'T├£RK KAHVES─░', 'price': 'Ôé║80'},
+                        {'name': 'CORTADO', 'price': 'Ôé║95'},
+                        {'name': 'LATTE', 'price': 'Ôé║100'},
                       ],
                     ),
                     const SizedBox(height: 30),
                     _buildMenuCard(
-                      title: 'SOĞUK VE TAZE',
+                      title: 'SO─ŞUK VE TAZE',
                       titleColor: Colors.white,
                       bgColor: AppColors.primaryRed,
                       items: [
-                        {'name': 'NITRO SOĞUK DEMLEME', 'price': '₺110'},
-                        {'name': 'HIBISCUS TEA', 'price': '₺95'},
-                        {'name': 'FROZEN ESPRESSO', 'price': '₺120'},
+                        {'name': 'NITRO SO─ŞUK DEMLEME', 'price': 'Ôé║110'},
+                        {'name': 'HIBISCUS TEA', 'price': 'Ôé║95'},
+                        {'name': 'FROZEN ESPRESSO', 'price': 'Ôé║120'},
                       ],
                     ),
                   ],
@@ -60,7 +60,7 @@ class MenuSelectionSection extends StatelessWidget {
                   children: [
                     _buildImageCard('KAVRUMLARIMIZ', 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=500'),
                     const SizedBox(height: 30),
-                    _buildImageCard('GÜNLÜK LEZZETLER', 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=500'),
+                    _buildImageCard('G├£NL├£K LEZZETLER', 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=500'),
                   ],
                 ),
               ),

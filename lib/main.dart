@@ -76,13 +76,13 @@ class _DunkMainPageState extends State<DunkMainPage> {
         child: activePageIndex == 0 
             ? Column(
                 children: [
-                  HeroSection(),           
-                  MenuSelectionSection(),   
-                  ModernRitualsSection(),   
-                  PrecisionDemandingSection(),
-                  VisitUsSection(), 
-                  SocialGallerySection(),
-                  FooterSection(),
+                  const HeroSection(),           
+                  const MenuSelectionSection(),   
+                  const ModernRitualsSection(),   
+                  const PrecisionDemandingSection(),
+                  const VisitUsSection(), 
+                  const SocialGallerySection(),
+                  const FooterSection(),
                 ],
               )
             : const FullMenuPage(),
