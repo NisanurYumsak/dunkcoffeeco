@@ -42,6 +42,7 @@ class WhyDunkSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _buildCard(
+                image: "assets/images/cekirdek.png",
                 icon: Icons.coffee,
                 title: "Özel Çekirdekler",
                 text: "Dünyanın farklı bölgelerinden seçilen kaliteli kahve çekirdekleri.",
@@ -50,6 +51,7 @@ class WhyDunkSection extends StatelessWidget {
               const SizedBox(width: 30),
 
               _buildCard(
+                image: "assets/images/tazekavrum.png",
                 icon: Icons.local_fire_department,
                 title: "Taze Kavrum",
                 text: "Her fincanda taze ve dengeli bir kahve aroması.",
@@ -58,8 +60,9 @@ class WhyDunkSection extends StatelessWidget {
               const SizedBox(width: 30),
 
               _buildCard(
+                image: "assets/images/ozenliservis.png",
                 icon: Icons.favorite,
-                title: "Özenli Hizmet",
+                title: "Özenli Servis",
                 text: "Kahveyi sadece içecek değil, deneyim olarak görüyoruz.",
               ),
             ],
@@ -69,15 +72,15 @@ class WhyDunkSection extends StatelessWidget {
     );
   }
 
-
   Widget _buildCard({
+    required String image,
     required IconData icon,
     required String title,
     required String text,
   }) {
     return Container(
       width: 280,
-      height: 250,
+      height: 310,
       padding: const EdgeInsets.all(30),
       decoration: BoxDecoration(
         color: AppColors.lightBg,
@@ -85,13 +88,25 @@ class WhyDunkSection extends StatelessWidget {
       ),
       child: Column(
         children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: Image.asset(
+              image,
+              height: 105,
+              width: 105,
+              fit: BoxFit.cover,
+            ),
+          ),
+
+          const SizedBox(height: 15),
+
           Icon(
             icon,
-            size: 40,
+            size: 32,
             color: AppColors.primaryRed,
           ),
 
-          const SizedBox(height: 25),
+          const SizedBox(height: 15),
 
           Text(
             title,
@@ -102,7 +117,7 @@ class WhyDunkSection extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: 15),
+          const SizedBox(height: 12),
 
           Text(
             text,

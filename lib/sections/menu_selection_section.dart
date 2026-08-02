@@ -15,43 +15,41 @@ class MenuSelectionSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                flex: 3,
-                child: Column(
-                  children: [
-                    _buildMenuCard(
-                      title: 'SICAK SER─░S─░',
-                      titleColor: AppColors.primaryRed,
-                      bgColor: Colors.white,
-                      items: [
-                        {'name': 'F─░LTRE KAHVE', 'price': 'Ôé║85'},
-                        {'name': 'T├£RK KAHVES─░', 'price': 'Ôé║80'},
-                        {'name': 'CORTADO', 'price': 'Ôé║95'},
-                        {'name': 'LATTE', 'price': 'Ôé║100'},
-                      ],
-                    ),
-                    const SizedBox(height: 30),
-                    _buildMenuCard(
-                      title: 'SO─ŞUK VE TAZE',
-                      titleColor: Colors.white,
-                      bgColor: AppColors.primaryRed,
-                      items: [
-                        {'name': 'NITRO SO─ŞUK DEMLEME', 'price': 'Ôé║110'},
-                        {'name': 'HIBISCUS TEA', 'price': 'Ôé║95'},
-                        {'name': 'FROZEN ESPRESSO', 'price': 'Ôé║120'},
-                      ],
-                    ),
+                child: _buildMenuCard(
+                  title: "SIGNATURE COFFEE",
+                  titleColor: Colors.white,
+                  bgColor: AppColors.primaryRed,
+                  items: [
+                    {"name": "Espresso", "price": "\$4"},
+                    {"name": "Cappuccino", "price": "\$5"},
+                    {"name": "Latte", "price": "\$5"},
+                    {"name": "Americano", "price": "\$4"},
                   ],
                 ),
               ),
+
               const SizedBox(width: 30),
+
               Expanded(
-                flex: 2,
-                child: Column(
-                  children: [
-                    _buildImageCard('KAVRUMLARIMIZ', 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=500'),
-                    const SizedBox(height: 30),
-                    _buildImageCard('G├£NL├£K LEZZETLER', 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=500'),
+                child: _buildMenuCard(
+                  title: "SPECIAL DRINKS",
+                  titleColor: AppColors.textDark,
+                  bgColor: Colors.white,
+                  items: [
+                    {"name": "Vanilla Latte", "price": "\$6"},
+                    {"name": "Caramel Macchiato", "price": "\$6"},
+                    {"name": "Mocha", "price": "\$5"},
+                    {"name": "Cold Brew", "price": "\$5"},
                   ],
+                ),
+              ),
+
+              const SizedBox(width: 30),
+
+              Expanded(
+                child: _buildImageCard(
+                  "Fresh Coffee Beans",
+                  "https://images.unsplash.com/photo-1447933601403-0c6688de566e",
                 ),
               ),
             ],
@@ -61,17 +59,28 @@ class MenuSelectionSection extends StatelessWidget {
     );
   }
 
-  Widget _buildMenuCard({required String title, required Color titleColor, required Color bgColor, required List<Map<String, String>> items}) {
+
+  Widget _buildMenuCard({
+    required String title,
+    required Color titleColor,
+    required Color bgColor,
+    required List<Map<String, String>> items,
+  }) {
     bool isRedBg = bgColor == AppColors.primaryRed;
+
     return Stack(
       children: [
         Transform.translate(
           offset: const Offset(8, 8),
           child: Container(
             height: isRedBg ? 230 : 260,
-            decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.circular(24)),
+            decoration: BoxDecoration(
+              color: Colors.black,
+              borderRadius: BorderRadius.circular(24),
+            ),
           ),
         ),
+
         Container(
           height: isRedBg ? 230 : 260,
           padding: const EdgeInsets.all(40),
@@ -80,26 +89,67 @@ class MenuSelectionSection extends StatelessWidget {
             borderRadius: BorderRadius.circular(24),
             border: Border.all(color: Colors.black, width: 1),
           ),
+
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title, style: TextStyle(color: titleColor, fontSize: 18, fontWeight: FontWeight.bold, letterSpacing: 0.5)),
+
+              Text(
+                title,
+                style: TextStyle(
+                  color: titleColor,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 0.5,
+                ),
+              ),
+
               const SizedBox(height: 10),
-              Divider(color: isRedBg ? Colors.white30 : Colors.black12, thickness: 1),
+
+              Divider(
+                color: isRedBg ? Colors.white30 : Colors.black12,
+              ),
+
               const SizedBox(height: 15),
+
               Expanded(
                 child: ListView.builder(
-                  shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: items.length,
+
                   itemBuilder: (context, index) {
+
                     return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
+
                         children: [
-                          Text(items[index]['name']!, style: TextStyle(color: isRedBg ? Colors.white : AppColors.textDark, fontSize: 14, fontWeight: FontWeight.bold)),
-                          Text(items[index]['price']!, style: TextStyle(color: isRedBg ? Colors.white70 : AppColors.primaryRed, fontSize: 14, fontWeight: FontWeight.bold)),
+
+                          Text(
+                            items[index]['name']!,
+                            style: TextStyle(
+                              color: isRedBg
+                                  ? Colors.white
+                                  : AppColors.textDark,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+
+                          Text(
+                            items[index]['price']!,
+                            style: TextStyle(
+                              color: isRedBg
+                                  ? Colors.white70
+                                  : AppColors.primaryRed,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+
                         ],
                       ),
                     );
@@ -113,37 +163,73 @@ class MenuSelectionSection extends StatelessWidget {
     );
   }
 
+
+
   Widget _buildImageCard(String title, String imageUrl) {
+
     return Stack(
       children: [
+
         Transform.translate(
           offset: const Offset(8, 8),
+
           child: Container(
             height: 245,
-            decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.circular(24)),
+
+            decoration: BoxDecoration(
+              color: Colors.black,
+              borderRadius: BorderRadius.circular(24),
+            ),
           ),
         ),
+
+
         Container(
           height: 245,
+
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(24),
-            border: Border.all(color: Colors.black, width: 1),
+            border: Border.all(color: Colors.black),
           ),
+
+
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+
             children: [
+
               Expanded(
                 child: Container(
                   decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.vertical(top: Radius.circular(23)),
-                    image: DecorationImage(image: NetworkImage(imageUrl), fit: BoxFit.cover),
+
+                    borderRadius:
+                        const BorderRadius.vertical(
+                          top: Radius.circular(23),
+                        ),
+
+                    image: DecorationImage(
+                      image: NetworkImage(imageUrl),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
+
+
               Padding(
                 padding: const EdgeInsets.all(20),
-                child: Text(title, style: const TextStyle(color: AppColors.textDark, fontSize: 14, fontWeight: FontWeight.bold, letterSpacing: 0.5)),
+
+                child: Text(
+                  title,
+
+                  style: const TextStyle(
+                    color: AppColors.textDark,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 0.5,
+                  ),
+                ),
               ),
             ],
           ),

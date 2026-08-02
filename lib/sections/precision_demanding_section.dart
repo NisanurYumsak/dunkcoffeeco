@@ -84,7 +84,7 @@ class PrecisionDemandingSection extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(32),
                       image: const DecorationImage(
-                        image: NetworkImage('https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=500'), 
+                        image: AssetImage("assets/images/kafeinmuh.png"),
                         fit: BoxFit.cover,
                       ),
                     ),
