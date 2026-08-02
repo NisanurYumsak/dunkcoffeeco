@@ -73,13 +73,21 @@ class _DunkMainPageState extends State<DunkMainPage> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: activePageIndex == 0 
-            ? Column(
-                
-              )
-            : const FullMenuPage(),
-      ),
+     body: SingleChildScrollView(
+  child: activePageIndex == 0
+      ? Column(
+          children: const [
+            HeroSection(),
+            MenuSelectionSection(),
+            ModernRitualsSection(),
+            PrecisionDemandingSection(),
+            VisitUsSection(),
+            SocialGallerySection(),
+            FooterSection(),
+          ],
+        )
+      : const FullMenuPage(),
+),
     );
   }
 
