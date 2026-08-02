@@ -7,7 +7,7 @@ class HeroSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 650, 
+      height: 650,
       width: double.infinity,
       color: AppColors.lightBg,
       child: Stack(
@@ -17,15 +17,14 @@ class HeroSection extends StatelessWidget {
             left: 100,
             right: 100,
             child: Opacity(
-              opacity: 0.05, 
+              opacity: 0.05,
               child: Image.network(
-                'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=600', 
+                'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=600',
                 fit: BoxFit.contain,
                 height: 450,
               ),
             ),
           ),
-             
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 80),
             child: Row(
@@ -37,48 +36,71 @@ class HeroSection extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 6,
+                        ),
                         color: AppColors.primaryRed,
                         child: const Text(
-                          'EMEK, SEVGİ, TUTKU...',
+                          'ÖZENLE HAZIRLANAN HER FİNCAN',
                           style: TextStyle(
-                            color: Colors.white, 
-                            fontSize: 10, 
+                            color: Colors.white,
+                            fontSize: 10,
                             fontWeight: FontWeight.bold,
                             letterSpacing: 1.5,
                           ),
                         ),
                       ),
                       const SizedBox(height: 25),
+
                       RichText(
                         text: const TextSpan(
                           style: TextStyle(
-                            fontSize: 52, 
-                            fontWeight: FontWeight.bold, 
-                            color: AppColors.textDark, 
+                            fontSize: 52,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.textDark,
                             height: 1.1,
                             letterSpacing: -0.5,
                           ),
                           children: [
-                            TextSpan(text: 'Günlük Ritüeliniz,\n'),
-                            TextSpan(text: 'YÜKSELDİ.', style: TextStyle(color: AppColors.primaryRed)),
+                            TextSpan(text: 'Kahvenin\n'),
+                            TextSpan(
+                              text: 'En İyi Hali.',
+                              style: TextStyle(
+                                color: AppColors.primaryRed,
+                              ),
+                            ),
                           ],
                         ),
                       ),
+
                       const SizedBox(height: 20),
+
                       const SizedBox(
-                        width: 420,
+                        width: 430,
                         child: Text(
-                          'Odaklanmış, akışkan ve en kaliteli kahve çekirdekleriyle tasarlanmış yüksek voltajlı bir sığınak. Meraklılar için üretilen kadim hoş geldiniz — zanaatın coşkuyla buluştuğu yer.',
-                          style: TextStyle(color: Colors.grey, fontSize: 14, height: 1.6),
+                          'Dunk Coffee’de her fincan; özenle seçilmiş çekirdekler, taze lezzetler ve samimi bir atmosferle buluşur. Güne güzel bir başlangıç yapmak ya da keyifli bir mola vermek için doğru adres.',
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 14,
+                            height: 1.7,
+                          ),
                         ),
                       ),
+
                       const SizedBox(height: 45),
+
                       Row(
                         children: [
-                          _buildShadowedButton("HEMEN SİPARİŞ VER", isRed: true),
+                          _buildShadowedButton(
+                            "MENÜYÜ İNCELE",
+                            isRed: true,
+                          ),
                           const SizedBox(width: 25),
-                          _buildShadowedButton("BİZİ ZİYARET EDİN", isRed: false),
+                          _buildShadowedButton(
+                            "ŞUBELERİMİZ",
+                            isRed: false,
+                          ),
                         ],
                       ),
                     ],
@@ -111,7 +133,9 @@ class HeroSection extends StatelessWidget {
                             color: Colors.grey.shade300,
                             borderRadius: BorderRadius.circular(32),
                             image: const DecorationImage(
-                              image: NetworkImage('https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=600'), 
+                              image: AssetImage(
+                                'assets/images/coffee.png',
+                              ),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -127,7 +151,11 @@ class HeroSection extends StatelessWidget {
       ),
     );
   }
-  Widget _buildShadowedButton(String label, {required bool isRed}) {
+
+  Widget _buildShadowedButton(
+    String label, {
+      required bool isRed,
+    }) {
     return Stack(
       children: [
         Transform.translate(
@@ -141,20 +169,27 @@ class HeroSection extends StatelessWidget {
             ),
           ),
         ),
-        Container(
+                Container(
           width: 180,
           height: 54,
           decoration: BoxDecoration(
             color: isRed ? AppColors.primaryRed : Colors.white,
             borderRadius: BorderRadius.circular(30),
-            border: isRed ? null : Border.all(color: Colors.black, width: 1.5),
+            border: isRed
+                ? null
+                : Border.all(
+                    color: Colors.black,
+                    width: 1.5,
+                  ),
           ),
           child: Center(
             child: Text(
               label,
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: isRed ? Colors.white : AppColors.textDark,
+                color: isRed
+                    ? Colors.white
+                    : AppColors.textDark,
                 fontWeight: FontWeight.bold,
                 fontSize: 11,
                 letterSpacing: 0.5,
