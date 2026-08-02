@@ -14,6 +14,26 @@ class HeroSection extends StatelessWidget {
       child: Stack(
         children: [
           Positioned(
+  top: 0,
+  left: 0,
+  right: 0,
+  child: Container(
+    height: 42,
+    color: Colors.black,
+    child: const Center(
+      child: Text(
+        'SPECIALTY COFFEE • FRESHLY BAKED • PREMIUM BEANS • EST. 2026 •',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 11,
+          fontWeight: FontWeight.bold,
+          letterSpacing: 2,
+        ),
+      ),
+    ),
+  ),
+),
+          Positioned(
             bottom: -50,
             left: 100,
             right: 100,
@@ -27,7 +47,11 @@ class HeroSection extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 80),
+            padding: const EdgeInsets.only(
+              left: 80,
+              right:80,
+              top: 40,
+            ),
             child: Row(
               children: [
                 Expanded(
