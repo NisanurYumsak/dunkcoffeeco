@@ -8,6 +8,7 @@ import 'package:dunkcoffeeco/sections/visit_us_section.dart';
 import 'package:dunkcoffeeco/sections/social_gallery_section.dart';
 import 'package:dunkcoffeeco/sections/footer_section.dart'; 
 import 'package:dunkcoffeeco/sections/full_menu_page.dart';
+import 'package:dunkcoffeeco/widgets/marquee_section.dart';
 
 void main() {
   runApp(const DunkCoffeeApp());
@@ -75,15 +76,7 @@ class _DunkMainPageState extends State<DunkMainPage> {
       body: SingleChildScrollView(
         child: activePageIndex == 0 
             ? Column(
-                children: [
-                  const HeroSection(),           
-                  const MenuSelectionSection(),   
-                  const ModernRitualsSection(),   
-                  const PrecisionDemandingSection(),
-                  const VisitUsSection(), 
-                  const SocialGallerySection(),
-                  const FooterSection(),
-                ],
+                
               )
             : const FullMenuPage(),
       ),

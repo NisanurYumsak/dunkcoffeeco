@@ -3,6 +3,7 @@ import 'package:dunkcoffeeco/constants/colors.dart';
 
 class HeroSection extends StatelessWidget {
   const HeroSection({super.key});
+  
 
   @override
   Widget build(BuildContext context) {
