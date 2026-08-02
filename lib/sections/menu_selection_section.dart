@@ -11,16 +11,6 @@ class MenuSelectionSection extends StatelessWidget {
       color: AppColors.lightBg,
       child: Column(
         children: [
-          const Text(
-            'ZANAAT & TAT',
-            style: TextStyle(color: AppColors.primaryRed, fontSize: 12, fontWeight: FontWeight.bold, letterSpacing: 2),
-          ),
-          const SizedBox(height: 10),
-          const Text(
-            'DUNK SE├çK─░S─░',
-            style: TextStyle(color: AppColors.textDark, fontSize: 32, fontWeight: FontWeight.bold, letterSpacing: 1),
-          ),
-          const SizedBox(height: 40),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
