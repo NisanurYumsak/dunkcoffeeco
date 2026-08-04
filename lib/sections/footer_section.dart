@@ -15,6 +15,7 @@ class FooterSection extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // SOL TARAF
               Expanded(
                 flex: 3,
                 child: Column(
@@ -33,8 +34,12 @@ class FooterSection extends StatelessWidget {
                     const SizedBox(
                       width: 260,
                       child: Text(
-                        'Türk kahve kültürünü modern tasarımla yükseltiyoruz. Kahve bir yakıt, mekan bir sığınaktır.',
-                        style: TextStyle(color: Colors.grey, fontSize: 13, height: 1.5),
+                        'Kahve kültürünü modern dokunuşlarla buluşturuyor, her tadımda sıcak ve samimi bir deneyim sunuyoruz.',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 13,
+                          height: 1.6,
+                        ),
                       ),
                     ),
                     const SizedBox(height: 30),
@@ -46,106 +51,117 @@ class FooterSection extends StatelessWidget {
                         const SizedBox(width: 12),
                         _buildSocialIcon(Icons.alternate_email),
                       ],
-                    )
-                  ],
-                ),
-              ),
-              Expanded(
-                flex: 2,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text('KEŞFET', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.grey, letterSpacing: 1)),
-                    const SizedBox(height: 20),
-                    _buildFooterLink('Kafe Menü'),
-                    _buildFooterLink('Tasarımımız'),
-                    _buildFooterLink('Etkinlikler'),
-                  ],
-                ),
-              ),
-              Expanded(
-                flex: 2,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text('HAKKIMIZDA', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.grey, letterSpacing: 1)),
-                    const SizedBox(height: 20),
-                    _buildFooterLink('Hikayemiz'),
-                    _buildFooterLink('Kavrum Evi'),
-                    _buildFooterLink('Lokasyonlar'),
+                    ),
                   ],
                 ),
               ),
 
+              // KEŞFET
               Expanded(
-                flex: 3,
+                flex: 2,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('BÜLTEN', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.grey, letterSpacing: 1)),
-                    const SizedBox(height: 15),
-                    const Text('Gelişmelerden ve özel kavrumlardan haberdar olun.', style: TextStyle(color: Colors.grey, fontSize: 13)),
-                    const SizedBox(height: 20),
-                    
-                    Container(
-                      width: double.infinity,
-                      height: 46,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: Colors.black, width: 1.2),
-                      ),
-                      padding: const EdgeInsets.symmetric(horizontal: 14),
-                      child: const TextField(
-                        decoration: InputDecoration(
-                          hintText: 'E-posta adresiniz',
-                          hintStyle: TextStyle(color: Colors.black26, fontSize: 13),
-                          border: InputBorder.none,
-                        ),
+                    const Text(
+                      'KEŞFET',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey,
+                        letterSpacing: 1,
                       ),
                     ),
-                    const SizedBox(height: 16),
-                    Stack(
-                      children: [
-                        Transform.translate(
-                          offset: const Offset(3, 3),
-                          child: Container(
-                            width: 140,
-                            height: 42,
-                            decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: 140,
-                          height: 42,
-                          decoration: BoxDecoration(
-                            color: AppColors.primaryRed,
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: Colors.black, width: 1.2),
-                          ),
-                          child: const Center(
-                            child: Text(
-                              'KAYIT OL',
-                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 11, letterSpacing: 0.5),
-                            ),
-                          ),
-                        ),
-                      ],
+                    const SizedBox(height: 20),
+                    _buildFooterLink('Ana Sayfa'),
+                    _buildFooterLink('Menü'),
+                    _buildFooterLink('Hakkımızda'),
+                    _buildFooterLink('Bize Ulaşın'),
+                  ],
+                ),
+              ),
+
+              // İLETİŞİM
+              Expanded(
+                flex: 4,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'İLETİŞİM',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey,
+                        letterSpacing: 1,
+                      ),
+                    ),
+
+                    const SizedBox(height: 20),
+
+                    const Text(
+                      '📍 Hacıhalil, 1212. Sk. No:5, 41400 Gebze/Kocaeli',
+                      style: TextStyle(
+                        color: AppColors.textDark,
+                        fontSize: 13,
+                        height: 1.6,
+                      ),
+                    ),
+
+                    const SizedBox(height: 12),
+
+                    const Text(
+                      '📞 0507 992 21 06',
+                      style: TextStyle(
+                        color: AppColors.textDark,
+                        fontSize: 13,
+                      ),
+                    ),
+
+                    const SizedBox(height: 12),
+
+                    const Text(
+                      '🕒 Her Gün 09:00 - 00:00',
+                      style: TextStyle(
+                        color: AppColors.textDark,
+                        fontSize: 13,
+                      ),
+                    ),
+
+                    const SizedBox(height: 20),
+                                        ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: Image.asset(
+                        "assets/images/map.png",
+                        width: 260,
+                        height: 140,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ],
                 ),
               ),
             ],
           ),
+
           const SizedBox(height: 60),
-          const Divider(color: Colors.black12, thickness: 1),
+
+          const Divider(
+            color: Colors.black12,
+            thickness: 1,
+          ),
+
           const SizedBox(height: 20),
-          const Text(
-            '© 2026 DUNK COFFEE ROASTERS. TÜM HAKLARI SAKLIDIR.',
-            style: TextStyle(color: Colors.grey, fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 0.5),
+
+          const Center(
+            child: Text(
+              '© 2026 DUNK COFFEE. TÜM HAKLARI SAKLIDIR.',
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 10,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 0.5,
+              ),
+            ),
           ),
         ],
       ),
@@ -158,19 +174,29 @@ class FooterSection extends StatelessWidget {
       height: 36,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        border: Border.all(color: Colors.black, width: 1.2),
         color: Colors.white,
+        border: Border.all(
+          color: Colors.black12,
+        ),
       ),
-      child: Icon(icon, size: 16, color: AppColors.textDark),
+      child: Icon(
+        icon,
+        size: 18,
+        color: AppColors.textDark,
+      ),
     );
   }
 
   Widget _buildFooterLink(String text) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6.0),
+      padding: const EdgeInsets.only(bottom: 10),
       child: Text(
         text,
-        style: const TextStyle(color: AppColors.textDark, fontSize: 13, fontWeight: FontWeight.w600),
+        style: const TextStyle(
+          color: AppColors.textDark,
+          fontSize: 13,
+          fontWeight: FontWeight.w500,
+        ),
       ),
     );
   }

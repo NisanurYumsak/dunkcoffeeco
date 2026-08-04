@@ -1,234 +1,259 @@
 import 'package:flutter/material.dart';
 import 'package:dunkcoffeeco/constants/colors.dart';
+import 'package:dunkcoffeeco/data/menu_data.dart';
+import 'package:dunkcoffeeco/widgets/menu_card.dart';
 
 class FullMenuPage extends StatelessWidget {
   const FullMenuPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final coffees =
+        menuItems.where((item) => item.category == "coffee").toList();
+
+    final icedCoffees =
+        menuItems.where((item) => item.category == "iced").toList();
+
+    final drinks =
+        menuItems.where((item) => item.category == "drink").toList();
+
+    final sandwiches =
+        menuItems.where((item) => item.category == "sandwich").toList();
+
+    final desserts =
+        menuItems.where((item) => item.category == "dessert").toList();
+
     return Container(
-      color: AppColors.lightBg,
-      padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 60),
       width: double.infinity,
+      color: AppColors.lightBg,
+      padding: const EdgeInsets.symmetric(
+        horizontal: 80,
+        vertical: 90,
+      ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+
           const Text(
-            'KAVRUM MENÜSÜ',
+            "MENÜMÜZ",
             style: TextStyle(
               color: AppColors.primaryRed,
-              fontSize: 12,
+              fontSize: 15,
               fontWeight: FontWeight.bold,
-              letterSpacing: 1.5,
+              letterSpacing: 2,
             ),
           ),
-          const SizedBox(height: 10),
-          const Text(
-            'ÖZENLE SEÇİLMİŞ, TİTİZLİKLE KAVRULMUŞ.',
-            style: TextStyle(
-              color: AppColors.textDark,
-              fontSize: 36,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 15),
-          const Text(
-            'Haftalık olarak güncellenen seçkimizle, kökenine ve işleme sürecine sadık kaldığımız çekirdekler.',
-            style: TextStyle(color: Colors.grey, fontSize: 15),
-          ),
-          const SizedBox(height: 50),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: _buildMenuCard(
-                  title: 'Dunk Blend №1',
-                  origin: 'Etiyopya & Kolombiya',
-                  roastLevel: 'Medium Roast',
-                  notes: 'Çikolata, narenciye ve tatlı karamel notaları.',
-                  price: '₺320',
-                  badgeColor: AppColors.primaryRed,
-                  textColor: Colors.white,
-                ),
-              ),
-              const SizedBox(width: 25),
-              Expanded(
-                child: _buildMenuCard(
-                  title: 'Guatemala Huehuetenango',
-                  origin: 'Tek Köken (Single Origin)',
-                  roastLevel: 'Light/Medium Roast',
-                  notes: 'Yeşil elma, esmer şeker ve dengeli asidite.',
-                  price: '₺380',
-                  badgeColor: Colors.black,
-                  textColor: Colors.white,
-                ),
-              ),
-              const SizedBox(width: 25),
 
-              Expanded(
-                child: _buildMenuCard(
-                  title: 'Ethiopia Yirgacheffe Kochere',
-                  origin: 'Natürel İşlem',
-                  roastLevel: 'Light Roast',
-                  notes: 'Yasemin aroması, bergamot ve canlı şeftali tonları.',
-                  price: '₺440',
-                  badgeColor: const Color(0xFFE2DDD9),
-                  textColor: AppColors.textDark,
-                ),
+          const SizedBox(height: 18),
+
+          const Text(
+            "Her Fincanda Özen,\nHer Lokmada Lezzet",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 46,
+              fontWeight: FontWeight.bold,
+              color: AppColors.textDark,
+              height: 1.2,
+            ),
+          ),
+
+          const SizedBox(height: 18),
+
+          const SizedBox(
+            width: 700,
+            child: Text(
+              "Dunk Coffee'nin özenle hazırlanan kahveleri, "
+              "serinleten içecekleri, taptaze sandviçleri "
+              "ve enfes tatlılarıyla her anınıza eşlik eden "
+              "lezzetleri keşfedin.",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 16,
+                height: 1.7,
               ),
+            ),
+          ),
+
+          const SizedBox(height: 55),
+
+          Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 18,
+            runSpacing: 18,
+            children: [
+              _buildCategoryChip("☕ Kahveler"),
+              _buildCategoryChip("🧊 Soğuk Kahveler"),
+              _buildCategoryChip("🍹 Soğuk İçecekler"),
+              _buildCategoryChip("🥪 Sandviçler"),
+              _buildCategoryChip("🍰 Tatlılar"),
             ],
           ),
-          
+
           const SizedBox(height: 80),
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(24),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.black, width: 1.5),
-            ),
-            child: Row(
-              children: [
-                const Icon(Icons.info_outline, color: AppColors.primaryRed, size: 28),
-                const SizedBox(width: 20),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
-                        'Toptan Alım ve Çekirdek Aboneliği',
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: AppColors.textDark),
-                      ),
-                      SizedBox(height: 4),
-                      Text(
-                        'Ofisiniz veya işletmeniz için özel kavrum profilleri ve toplu sipariş avantajları hakkında bilgi almak için bizimle iletişime geçebilirsiniz.',
-                        style: TextStyle(color: Colors.grey, fontSize: 13),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+
+
+          // ☕ KAHVELER
+
+          _title("☕ Kahveler"),
+
+          _description(
+            "Espresso bazlı sıcak kahvelerimiz.",
+          ),
+
+          const SizedBox(height: 35),
+
+          Wrap(
+            spacing: 30,
+            runSpacing: 30,
+            children: coffees
+                .map((item) => MenuCard(item: item))
+                .toList(),
+          ),
+
+
+          const SizedBox(height: 90),
+
+
+          // 🧊 SOĞUK KAHVELER
+
+          _title("🧊 Soğuk Kahveler"),
+
+          _description(
+            "Serinleten espresso bazlı kahveler.",
+          ),
+
+          const SizedBox(height: 35),
+
+          Wrap(
+            spacing: 30,
+            runSpacing: 30,
+            children: icedCoffees
+                .map((item) => MenuCard(item: item))
+                .toList(),
+          ),
+
+
+          const SizedBox(height: 90),
+
+
+          // 🍹 SOĞUK İÇECEKLER
+
+          _title("🍹 Soğuk İçecekler"),
+
+          _description(
+            "Meyveli ve ferahlatıcı içecekler.",
+          ),
+
+          const SizedBox(height: 35),
+
+          Wrap(
+            spacing: 30,
+            runSpacing: 30,
+            children: drinks
+                .map((item) => MenuCard(item: item))
+                .toList(),
+          ),
+
+
+          const SizedBox(height: 90),
+
+
+          // 🥪 SANDVİÇLER
+
+          _title("🥪 Sandviçler"),
+
+          _description(
+            "Günlük hazırlanan taptaze sandviçler.",
+          ),
+
+          const SizedBox(height: 35),
+
+          Wrap(
+            spacing: 30,
+            runSpacing: 30,
+            children: sandwiches
+                .map((item) => MenuCard(item: item))
+                .toList(),
+          ),
+
+
+          const SizedBox(height: 90),
+
+
+          // 🍰 TATLILAR
+
+          _title("🍰 Tatlılar"),
+
+          _description(
+            "Kahvenizin yanına tatlı bir eşlikçi.",
+          ),
+
+          const SizedBox(height: 35),
+
+          Wrap(
+            spacing: 30,
+            runSpacing: 30,
+            children: desserts
+                .map((item) => MenuCard(item: item))
+                .toList(),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildMenuCard({
-    required String title,
-    required String origin,
-    required String roastLevel,
-    required String notes,
-    required String price,
-    required Color badgeColor,
-    required Color textColor,
-  }) {
-    return Stack(
-      children: [
-        Transform.translate(
-          offset: const Offset(6, 6),
-          child: Container(
-            height: 340,
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.circular(16),
-            ),
-          ),
+
+  Widget _title(String text) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontSize: 36,
+          fontWeight: FontWeight.bold,
+          color: AppColors.textDark,
         ),
-        Container(
-          height: 340,
-          padding: const EdgeInsets.all(30),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: Colors.black, width: 1.5),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: badgeColor,
-                      borderRadius: BorderRadius.circular(6),
-                      border: Border.all(color: Colors.black, width: 1),
-                    ),
-                    child: Text(
-                      roastLevel,
-                      style: TextStyle(
-                        color: textColor,
-                        fontSize: 10,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 0.5,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  // Kahve İsmi
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.textDark,
-                    ),
-                  ),
-                  const SizedBox(height: 6),
-                  Text(
-                    origin,
-                    style: const TextStyle(
-                      fontSize: 13,
-                      color: AppColors.primaryRed,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    notes,
-                    style: const TextStyle(
-                      fontSize: 13,
-                      color: Colors.grey,
-                      height: 1.4,
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    price,
-                    style: const TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.textDark,
-                    ),
-                  ),
-                  Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Icon(
-                      Icons.arrow_forward_sharp,
-                      color: Colors.white,
-                      size: 18,
-                    ),
-                  ),
-                ],
-              )
-            ],
-          ),
+      ),
+    );
+  }
+
+
+  Widget _description(String text) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Text(
+        text,
+        style: const TextStyle(
+          color: Colors.grey,
+          fontSize: 15,
         ),
-      ],
+      ),
+    );
+  }
+
+
+  Widget _buildCategoryChip(String text) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 22,
+        vertical: 12,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(30),
+        border: Border.all(
+          color: Colors.black12,
+        ),
+      ),
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w600,
+          color: AppColors.textDark,
+        ),
+      ),
     );
   }
 }
