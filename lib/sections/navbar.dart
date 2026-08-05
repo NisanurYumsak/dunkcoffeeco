@@ -41,7 +41,7 @@ class DunkNavbar extends StatelessWidget implements PreferredSizeWidget {
               borderRadius: BorderRadius.circular(4), 
             ),
             child: const Text(
-              'ŞİMDİ SİPARİŞ VER',
+              'Karanlık Mod',
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,

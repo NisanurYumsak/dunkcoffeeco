@@ -15,17 +15,17 @@ class MenuCard extends StatelessWidget {
     return Container(
       width: 340,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.black,
         borderRadius: BorderRadius.circular(24),
         border: Border.all(
-          color: Colors.black12,
+          color: Colors.white10,
           width: 1,
         ),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
-            color: Colors.black.withOpacity(.05),
-            blurRadius: 18,
-            offset: const Offset(0, 8),
+            color: Colors.black87,
+            blurRadius: 20,
+            offset: Offset(0, 10),
           ),
         ],
       ),
@@ -37,7 +37,7 @@ class MenuCard extends StatelessWidget {
             height: 220,
             width: double.infinity,
             decoration: const BoxDecoration(
-              color: Color(0xffefefef),
+              color: Color(0xff111111),
               borderRadius: BorderRadius.vertical(
                 top: Radius.circular(24),
               ),
@@ -46,7 +46,7 @@ class MenuCard extends StatelessWidget {
               child: Icon(
                 Icons.image_outlined,
                 size: 60,
-                color: Colors.grey,
+                color: Colors.white30,
               ),
             ),
           ),
@@ -62,7 +62,7 @@ class MenuCard extends StatelessWidget {
                     vertical: 5,
                   ),
                   decoration: BoxDecoration(
-                    color: AppColors.primaryRed.withOpacity(.1),
+                    color: const Color(0xFF2A0000),
                     borderRadius: BorderRadius.circular(30),
                   ),
                   child: Text(
@@ -82,7 +82,7 @@ class MenuCard extends StatelessWidget {
                   style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: AppColors.textDark,
+                    color: Colors.white,
                   ),
                 ),
 
@@ -91,7 +91,7 @@ class MenuCard extends StatelessWidget {
                 Text(
                   item.description,
                   style: const TextStyle(
-                    color: Colors.grey,
+                    color: Colors.white70,
                     height: 1.5,
                   ),
                 ),
@@ -101,7 +101,8 @@ class MenuCard extends StatelessWidget {
                 const Text(
                   "İçerik",
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                     color: Colors.white,
+                     fontWeight: FontWeight.bold,
                   ),
                 ),
 
@@ -114,6 +115,7 @@ class MenuCard extends StatelessWidget {
                 const Text(
                   "Alerjen",
                   style: TextStyle(
+                    color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

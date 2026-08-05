@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:dunkcoffeeco/constants/colors.dart';
 
-class HeroSection extends StatelessWidget {
-  const HeroSection({super.key});
-  
+ class HeroSection extends StatelessWidget {
+  final VoidCallback onGalleryPressed;
+
+  const HeroSection({
+    super.key,
+    required this.onGalleryPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
       height: 650,
       width: double.infinity,
-      color: AppColors.lightBg,
+      color: Theme.of(context).scaffoldBackgroundColor,
       child: Stack(
         children: [
           Positioned(
@@ -79,15 +84,15 @@ class HeroSection extends StatelessWidget {
                       const SizedBox(height: 25),
 
                       RichText(
-                        text: const TextSpan(
+                        text: TextSpan(
                           style: TextStyle(
                             fontSize: 52,
                             fontWeight: FontWeight.bold,
-                            color: AppColors.textDark,
+                            color: isDark ? Colors.white : AppColors.textDark,
                             height: 1.1,
                             letterSpacing: -0.5,
                           ),
-                          children: [
+                          children: const [
                             TextSpan(text: 'Kahvenin\n'),
                             TextSpan(
                               text: 'En İyi Hali.',
@@ -101,12 +106,12 @@ class HeroSection extends StatelessWidget {
 
                       const SizedBox(height: 20),
 
-                      const SizedBox(
+                      SizedBox(
                         width: 430,
                         child: Text(
                           'Dunk Coffee’de her fincan; özenle seçilmiş çekirdekler, taze lezzetler ve samimi bir atmosferle buluşur. Güne güzel bir başlangıç yapmak ya da keyifli bir mola vermek için doğru adres.',
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: isDark ? Colors.white70 : Colors.grey,
                             fontSize: 14,
                             height: 1.7,
                           ),
@@ -118,11 +123,13 @@ class HeroSection extends StatelessWidget {
                       Row(
                         children: [
                           _buildShadowedButton(
+                            context,
                             "MENÜYÜ İNCELE",
                             isRed: true,
                           ),
                           const SizedBox(width: 25),
                           _buildShadowedButton(
+                            context,
                             "ŞUBELERİMİZ",
                             isRed: false,
                           ),
@@ -155,7 +162,7 @@ class HeroSection extends StatelessWidget {
                           width: 380,
                           height: 420,
                           decoration: BoxDecoration(
-                            color: Colors.grey.shade300,
+                            color: isDark ? const Color(0xFF2A2A2A) : Colors.grey.shade300,
                             borderRadius: BorderRadius.circular(32),
                             image: const DecorationImage(
                               image: AssetImage(
@@ -178,9 +185,11 @@ class HeroSection extends StatelessWidget {
   }
 
   Widget _buildShadowedButton(
-    String label, {
-      required bool isRed,
-    }) {
+  BuildContext context,
+  String label, {
+  required bool isRed,
+}) {
+  final isDark = Theme.of(context).brightness == Brightness.dark; {
     return Stack(
       children: [
         Transform.translate(
@@ -198,12 +207,14 @@ class HeroSection extends StatelessWidget {
           width: 180,
           height: 54,
           decoration: BoxDecoration(
-            color: isRed ? AppColors.primaryRed : Colors.white,
+            color: isRed
+    ? AppColors.primaryRed
+    : (isDark ? const Color(0xFF2A2A2A) : Colors.white),
             borderRadius: BorderRadius.circular(30),
             border: isRed
                 ? null
                 : Border.all(
-                    color: Colors.black,
+                    color: isDark ? Colors.white24 : Colors.black,
                     width: 1.5,
                   ),
           ),
@@ -213,8 +224,8 @@ class HeroSection extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: isRed
-                    ? Colors.white
-                    : AppColors.textDark,
+    ? Colors.white
+    : (isDark ? Colors.white : AppColors.textDark),
                 fontWeight: FontWeight.bold,
                 fontSize: 11,
                 letterSpacing: 0.5,
@@ -225,4 +236,4 @@ class HeroSection extends StatelessWidget {
       ],
     );
   }
-}
+}}

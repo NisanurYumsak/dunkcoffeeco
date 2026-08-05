@@ -6,8 +6,10 @@ class SocialGallerySection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
-      color: AppColors.lightBg,
+      color: Theme.of(context).scaffoldBackgroundColor,
       padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 90),
       width: double.infinity,
       child: Column(
@@ -21,10 +23,12 @@ class SocialGallerySection extends StatelessWidget {
                 Icons.camera_alt_outlined,
                 color: AppColors.primaryRed,
               ),
-              label: const Text(
+              label: Text(
                 '@dunkcoffeeco',
                 style: TextStyle(
-                  color: AppColors.textDark,
+                  color: isDark
+                      ? AppColors.textLight
+                      : AppColors.textDark,
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
@@ -37,10 +41,10 @@ class SocialGallerySection extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // SOL BÜYÜK FOTOĞRAF
               Expanded(
                 flex: 4,
                 child: _buildGalleryCard(
+                  context: context,
                   height: 420,
                   color: const Color(0xFFE2DDD9),
                   child: Image.asset(
@@ -58,9 +62,9 @@ class SocialGallerySection extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        // SAĞ ÜST SOL FOTOĞRAF
                         Expanded(
                           child: _buildGalleryCard(
+                            context: context,
                             height: 400,
                             color: const Color(0xFFDFE4E2),
                             child: Image.asset(
@@ -72,9 +76,9 @@ class SocialGallerySection extends StatelessWidget {
 
                         const SizedBox(width: 20),
 
-                        // SAĞ ÜST SAĞ FOTOĞRAF
                         Expanded(
                           child: _buildGalleryCard(
+                            context: context,
                             height: 400,
                             color: const Color(0xFFE7E2DD),
                             child: Image.asset(
@@ -88,8 +92,8 @@ class SocialGallerySection extends StatelessWidget {
 
                     const SizedBox(height: 20),
 
-                    // SAĞ ALT 4'LÜ KOLAJ
                     _buildGalleryCard(
+                      context: context,
                       height: 200,
                       color: const Color(0xFFDCDFE2),
                       child: Image.asset(
@@ -108,17 +112,23 @@ class SocialGallerySection extends StatelessWidget {
   }
 
   Widget _buildGalleryCard({
+    required BuildContext context,
     required double height,
     required Color color,
     required Widget child,
   }) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       height: height,
       width: double.infinity,
       decoration: BoxDecoration(
-  color: color,
-  borderRadius: BorderRadius.circular(20),
-),
+        color: isDark ? AppColors.darkCard : color,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: isDark ? Colors.white24 : Colors.transparent,
+        ),
+      ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(19),
         child: child,

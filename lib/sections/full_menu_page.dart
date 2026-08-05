@@ -8,6 +8,8 @@ class FullMenuPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     final coffees =
         menuItems.where((item) => item.category == "coffee").toList();
 
@@ -25,7 +27,7 @@ class FullMenuPage extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      color: AppColors.lightBg,
+      color: Theme.of(context).scaffoldBackgroundColor,
       padding: const EdgeInsets.symmetric(
         horizontal: 80,
         vertical: 90,
@@ -33,7 +35,6 @@ class FullMenuPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-
           const Text(
             "MENÜMÜZ",
             style: TextStyle(
@@ -46,20 +47,20 @@ class FullMenuPage extends StatelessWidget {
 
           const SizedBox(height: 18),
 
-          const Text(
+          Text(
             "Her Fincanda Özen,\nHer Lokmada Lezzet",
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 46,
               fontWeight: FontWeight.bold,
-              color: AppColors.textDark,
+              color: isDark ? Colors.white : AppColors.textDark,
               height: 1.2,
             ),
           ),
 
           const SizedBox(height: 18),
 
-          const SizedBox(
+          SizedBox(
             width: 700,
             child: Text(
               "Dunk Coffee'nin özenle hazırlanan kahveleri, "
@@ -68,7 +69,7 @@ class FullMenuPage extends StatelessWidget {
               "lezzetleri keşfedin.",
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Colors.grey,
+                color: isDark ? Colors.white70 : Colors.grey,
                 fontSize: 16,
                 height: 1.7,
               ),
@@ -82,176 +83,136 @@ class FullMenuPage extends StatelessWidget {
             spacing: 18,
             runSpacing: 18,
             children: [
-              _buildCategoryChip("☕ Kahveler"),
-              _buildCategoryChip("🧊 Soğuk Kahveler"),
-              _buildCategoryChip("🍹 Soğuk İçecekler"),
-              _buildCategoryChip("🥪 Sandviçler"),
-              _buildCategoryChip("🍰 Tatlılar"),
+              _buildCategoryChip(context, "☕ Kahveler"),
+              _buildCategoryChip(context, "🧊 Soğuk Kahveler"),
+              _buildCategoryChip(context, "🍹 Soğuk İçecekler"),
+              _buildCategoryChip(context, "🥪 Sandviçler"),
+              _buildCategoryChip(context, "🍰 Tatlılar"),
             ],
           ),
 
           const SizedBox(height: 80),
 
-
-          // ☕ KAHVELER
-
-          _title("☕ Kahveler"),
-
-          _description(
-            "Espresso bazlı sıcak kahvelerimiz.",
-          ),
-
+          _title(context, "☕ Kahveler"),
+          _description(context, "Espresso bazlı sıcak kahveler."),
           const SizedBox(height: 35),
 
           Wrap(
             spacing: 30,
             runSpacing: 30,
-            children: coffees
-                .map((item) => MenuCard(item: item))
-                .toList(),
+            children: coffees.map((item) => MenuCard(item: item)).toList(),
           ),
-
 
           const SizedBox(height: 90),
 
-
-          // 🧊 SOĞUK KAHVELER
-
-          _title("🧊 Soğuk Kahveler"),
-
-          _description(
-            "Serinleten espresso bazlı kahveler.",
-          ),
-
+          _title(context, "🧊 Soğuk Kahveler"),
+          _description(context, "Serinleten espresso bazlı kahveler."),
           const SizedBox(height: 35),
 
           Wrap(
             spacing: 30,
             runSpacing: 30,
-            children: icedCoffees
-                .map((item) => MenuCard(item: item))
-                .toList(),
+            children:
+                icedCoffees.map((item) => MenuCard(item: item)).toList(),
           ),
-
 
           const SizedBox(height: 90),
 
-
-          // 🍹 SOĞUK İÇECEKLER
-
-          _title("🍹 Soğuk İçecekler"),
-
-          _description(
-            "Meyveli ve ferahlatıcı içecekler.",
-          ),
-
+          _title(context, "🍹 Soğuk İçecekler"),
+          _description(context, "Meyveli ve ferahlatıcı içecekler."),
           const SizedBox(height: 35),
 
           Wrap(
             spacing: 30,
             runSpacing: 30,
-            children: drinks
-                .map((item) => MenuCard(item: item))
-                .toList(),
+            children: drinks.map((item) => MenuCard(item: item)).toList(),
           ),
-
 
           const SizedBox(height: 90),
 
-
-          // 🥪 SANDVİÇLER
-
-          _title("🥪 Sandviçler"),
-
-          _description(
-            "Günlük hazırlanan taptaze sandviçler.",
-          ),
-
+          _title(context, "🥪 Sandviçler"),
+          _description(context, "Günlük hazırlanan taptaze sandviçler."),
           const SizedBox(height: 35),
 
           Wrap(
             spacing: 30,
             runSpacing: 30,
-            children: sandwiches
-                .map((item) => MenuCard(item: item))
-                .toList(),
+            children:
+                sandwiches.map((item) => MenuCard(item: item)).toList(),
           ),
-
 
           const SizedBox(height: 90),
 
-
-          // 🍰 TATLILAR
-
-          _title("🍰 Tatlılar"),
-
-          _description(
-            "Kahvenizin yanına tatlı bir eşlikçi.",
-          ),
-
+          _title(context, "🍰 Tatlılar"),
+          _description(context, "Kahvenizin yanına tatlı bir eşlikçi."),
           const SizedBox(height: 35),
 
           Wrap(
             spacing: 30,
             runSpacing: 30,
-            children: desserts
-                .map((item) => MenuCard(item: item))
-                .toList(),
+            children: desserts.map((item) => MenuCard(item: item)).toList(),
           ),
         ],
       ),
     );
-  }
+  }  Widget _title(BuildContext context, String text) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
-
-  Widget _title(String text) {
     return Align(
       alignment: Alignment.centerLeft,
       child: Text(
         text,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 36,
           fontWeight: FontWeight.bold,
-          color: AppColors.textDark,
+          color: isDark ? Colors.white : AppColors.textDark,
         ),
       ),
     );
   }
 
+  Widget _description(BuildContext context, String text) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
-  Widget _description(String text) {
     return Align(
       alignment: Alignment.centerLeft,
       child: Text(
         text,
-        style: const TextStyle(
-          color: Colors.grey,
+        style: TextStyle(
+          color: isDark ? Colors.white70 : Colors.grey,
           fontSize: 15,
         ),
       ),
     );
   }
 
+  Widget _buildCategoryChip(BuildContext context, String text) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
-  Widget _buildCategoryChip(String text) {
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: 22,
         vertical: 12,
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: isDark
+            ? const Color(0xFF1E1E1E)
+            : Colors.white,
         borderRadius: BorderRadius.circular(30),
         border: Border.all(
-          color: Colors.black12,
+          color: isDark
+              ? Colors.white24
+              : Colors.black12,
         ),
       ),
       child: Text(
         text,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w600,
-          color: AppColors.textDark,
+          color: isDark
+              ? Colors.white
+              : AppColors.textDark,
         ),
       ),
     );

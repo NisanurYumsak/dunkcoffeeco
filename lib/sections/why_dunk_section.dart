@@ -6,31 +6,33 @@ class WhyDunkSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(
         horizontal: 80,
         vertical: 90,
       ),
-      color: Colors.white,
+      color: Theme.of(context).scaffoldBackgroundColor,
       child: Column(
         children: [
-          const Text(
+          Text(
             "Neden Dunk Coffee?",
             style: TextStyle(
               fontSize: 42,
               fontWeight: FontWeight.bold,
-              color: AppColors.textDark,
+              color: isDark ? Colors.white : AppColors.textDark,
             ),
           ),
 
           const SizedBox(height: 15),
 
-          const Text(
+          Text(
             "Kaliteli çekirdekler, özenli hazırlık ve sıcak bir kahve deneyimi için buradayız.",
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Colors.grey,
+              color: isDark ? Colors.white70 : Colors.grey,
               fontSize: 15,
               height: 1.6,
             ),
@@ -42,15 +44,18 @@ class WhyDunkSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _buildCard(
+                context: context,
                 image: "assets/images/cekirdek.png",
                 icon: Icons.coffee,
                 title: "Özel Çekirdekler",
-                text: "Dünyanın farklı bölgelerinden seçilen kaliteli kahve çekirdekleri.",
+                text:
+                    "Dünyanın farklı bölgelerinden seçilen kaliteli kahve çekirdekleri.",
               ),
 
               const SizedBox(width: 30),
 
               _buildCard(
+                context: context,
                 image: "assets/images/tazekavrum.png",
                 icon: Icons.local_fire_department,
                 title: "Taze Kavrum",
@@ -60,10 +65,12 @@ class WhyDunkSection extends StatelessWidget {
               const SizedBox(width: 30),
 
               _buildCard(
+                context: context,
                 image: "assets/images/ozenliservis.png",
                 icon: Icons.favorite,
                 title: "Özenli Servis",
-                text: "Kahveyi sadece içecek değil, deneyim olarak görüyoruz.",
+                text:
+                    "Kahveyi sadece içecek değil, deneyim olarak görüyoruz.",
               ),
             ],
           ),
@@ -73,17 +80,20 @@ class WhyDunkSection extends StatelessWidget {
   }
 
   Widget _buildCard({
+    required BuildContext context,
     required String image,
     required IconData icon,
     required String title,
     required String text,
   }) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       width: 280,
       height: 310,
       padding: const EdgeInsets.all(30),
       decoration: BoxDecoration(
-        color: AppColors.lightBg,
+        color: isDark ? AppColors.darkCard : AppColors.lightBg,
         borderRadius: BorderRadius.circular(24),
       ),
       child: Column(
@@ -110,10 +120,11 @@ class WhyDunkSection extends StatelessWidget {
 
           Text(
             title,
-            style: const TextStyle(
+            textAlign: TextAlign.center,
+            style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: AppColors.textDark,
+              color: isDark ? Colors.white : AppColors.textDark,
             ),
           ),
 
@@ -122,9 +133,9 @@ class WhyDunkSection extends StatelessWidget {
           Text(
             text,
             textAlign: TextAlign.center,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 13,
-              color: Colors.grey,
+              color: isDark ? Colors.white70 : Colors.grey,
               height: 1.5,
             ),
           ),

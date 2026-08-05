@@ -6,32 +6,34 @@ class ColdDessertSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(
         horizontal: 80,
         vertical: 90,
       ),
-      color: AppColors.lightBg,
+      color: Theme.of(context).scaffoldBackgroundColor,
       child: Column(
         children: [
-          const Text(
+          Text(
             "Sadece Kahve Değil, Daha Fazlası",
             style: TextStyle(
               fontSize: 42,
               fontWeight: FontWeight.bold,
-              color: AppColors.textDark,
+              color: isDark ? Colors.white : AppColors.textDark,
             ),
           ),
 
           const SizedBox(height: 15),
 
-          const Text(
+          Text(
             "Dunk Coffee deneyimini soğuk içeceklerimiz ve özenle hazırlanan tatlılarımızla tamamlıyoruz.",
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 15,
-              color: Colors.grey,
+              color: isDark ? Colors.white70 : Colors.grey,
               height: 1.6,
             ),
           ),
@@ -42,6 +44,7 @@ class ColdDessertSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _buildExperienceCard(
+                context: context,
                 image: "assets/images/sogukicecek.png",
                 title: "Serinleten Lezzetler",
                 description:
@@ -52,6 +55,7 @@ class ColdDessertSection extends StatelessWidget {
               const SizedBox(width: 40),
 
               _buildExperienceCard(
+                context: context,
                 image: "assets/images/tatli.png",
                 title: "Tatlı Molaları",
                 description:
@@ -66,23 +70,26 @@ class ColdDessertSection extends StatelessWidget {
   }
 
   Widget _buildExperienceCard({
+    required BuildContext context,
     required String image,
     required String title,
     required String description,
     required IconData icon,
   }) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       width: 500,
       height: 700,
       padding: const EdgeInsets.all(30),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: isDark ? AppColors.darkCard : Colors.white,
         borderRadius: BorderRadius.circular(28),
         boxShadow: [
           BoxShadow(
-            color: Colors.black12,
+            color: isDark ? Colors.black54 : Colors.black12,
             blurRadius: 15,
-            offset: Offset(0, 8),
+            offset: const Offset(0, 8),
           ),
         ],
       ),
@@ -113,10 +120,10 @@ class ColdDessertSection extends StatelessWidget {
           Text(
             title,
             textAlign: TextAlign.center,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: AppColors.textDark,
+              color: isDark ? Colors.white : AppColors.textDark,
             ),
           ),
 
@@ -125,9 +132,9 @@ class ColdDessertSection extends StatelessWidget {
           Text(
             description,
             textAlign: TextAlign.center,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 16,
-              color: Colors.grey,
+              color: isDark ? Colors.white70 : Colors.grey,
               height: 1.6,
             ),
           ),
