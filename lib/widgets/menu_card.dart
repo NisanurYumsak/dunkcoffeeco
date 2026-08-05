@@ -12,20 +12,22 @@ class MenuCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       width: 340,
       decoration: BoxDecoration(
-        color: Colors.black,
+        color: isDark ? Colors.black : Colors.white,
         borderRadius: BorderRadius.circular(24),
         border: Border.all(
-          color: Colors.white10,
+          color: isDark ? Colors.white10 : Colors.black12,
           width: 1,
         ),
-        boxShadow: const [
+        boxShadow: [
           BoxShadow(
-            color: Colors.black87,
+            color: isDark ? Colors.black87 : Colors.black12,
             blurRadius: 20,
-            offset: Offset(0, 10),
+            offset: const Offset(0, 10),
           ),
         ],
       ),
@@ -36,9 +38,11 @@ class MenuCard extends StatelessWidget {
           Container(
             height: 220,
             width: double.infinity,
-            decoration: const BoxDecoration(
-              color: Color(0xff111111),
-              borderRadius: BorderRadius.vertical(
+            decoration: BoxDecoration(
+              color: isDark
+                  ? const Color(0xff111111)
+                  : Colors.grey.shade100,
+              borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(24),
               ),
             ),
@@ -79,10 +83,12 @@ class MenuCard extends StatelessWidget {
 
                 Text(
                   item.name,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: isDark
+                        ? Colors.white
+                        : AppColors.textDark,
                   ),
                 ),
 
@@ -90,39 +96,59 @@ class MenuCard extends StatelessWidget {
 
                 Text(
                   item.description,
-                  style: const TextStyle(
-                    color: Colors.white70,
+                  style: TextStyle(
+                    color: isDark
+                        ? Colors.white70
+                        : Colors.black54,
                     height: 1.5,
                   ),
                 ),
 
                 const SizedBox(height: 20),
 
-                const Text(
+                Text(
                   "İçerik",
                   style: TextStyle(
-                     color: Colors.white,
-                     fontWeight: FontWeight.bold,
-                  ),
-                ),
-
-                const SizedBox(height: 4),
-
-                Text(item.ingredients),
-
-                const SizedBox(height: 16),
-
-                const Text(
-                  "Alerjen",
-                  style: TextStyle(
-                    color: Colors.white,
+                    color: isDark
+                        ? Colors.white
+                        : AppColors.textDark,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
 
                 const SizedBox(height: 4),
 
-                Text(item.allergens),
+                Text(
+                  item.ingredients,
+                  style: TextStyle(
+                    color: isDark
+                        ? Colors.white70
+                        : Colors.black87,
+                  ),
+                ),
+
+                const SizedBox(height: 16),
+
+                Text(
+                  "Alerjen",
+                  style: TextStyle(
+                    color: isDark
+                        ? Colors.white
+                        : AppColors.textDark,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+
+                const SizedBox(height: 4),
+
+                Text(
+                  item.allergens,
+                  style: TextStyle(
+                    color: isDark
+                        ? Colors.white70
+                        : Colors.black87,
+                  ),
+                ),
 
                 const SizedBox(height: 24),
 

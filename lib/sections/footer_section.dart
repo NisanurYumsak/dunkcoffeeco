@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:dunkcoffeeco/constants/colors.dart';
 
 class FooterSection extends StatelessWidget {
-  const FooterSection({super.key});
+  final VoidCallback onGalleryPressed;
+
+  const FooterSection({
+    super.key,
+    required this.onGalleryPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -45,13 +50,24 @@ class FooterSection extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 30),
+
                     Row(
                       children: [
-                        _buildSocialIcon(context, Icons.camera_alt),
+                        _buildSocialIcon(
+                          context,
+                          Icons.camera_alt,
+                          onTap: onGalleryPressed,
+                        ),
                         const SizedBox(width: 12),
-                        _buildSocialIcon(context, Icons.language),
+                        _buildSocialIcon(
+                          context,
+                          Icons.language,
+                        ),
                         const SizedBox(width: 12),
-                        _buildSocialIcon(context, Icons.alternate_email),
+                        _buildSocialIcon(
+                          context,
+                          Icons.alternate_email,
+                        ),
                       ],
                     ),
                   ],
@@ -149,7 +165,6 @@ class FooterSection extends StatelessWidget {
 
           Divider(
             color: isDark ? Colors.white24 : Colors.black12,
-            thickness: 1,
           ),
 
           const SizedBox(height: 20),
@@ -168,23 +183,31 @@ class FooterSection extends StatelessWidget {
     );
   }
 
-  Widget _buildSocialIcon(BuildContext context, IconData icon) {
+  Widget _buildSocialIcon(
+    BuildContext context,
+    IconData icon, {
+    VoidCallback? onTap,
+  }) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return Container(
-      width: 36,
-      height: 36,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: isDark ? AppColors.darkCard : Colors.white,
-        border: Border.all(
-          color: isDark ? Colors.white24 : Colors.black12,
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(50),
+      child: Container(
+        width: 36,
+        height: 36,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: isDark ? AppColors.darkCard : Colors.white,
+          border: Border.all(
+            color: isDark ? Colors.white24 : Colors.black12,
+          ),
         ),
-      ),
-      child: Icon(
-        icon,
-        size: 18,
-        color: isDark ? Colors.white : AppColors.textDark,
+        child: Icon(
+          icon,
+          size: 18,
+          color: isDark ? Colors.white : AppColors.textDark,
+        ),
       ),
     );
   }

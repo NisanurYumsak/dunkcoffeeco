@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:dunkcoffeeco/constants/colors.dart';
 
- class HeroSection extends StatelessWidget {
-  final VoidCallback onGalleryPressed;
+class HeroSection extends StatelessWidget {
+  final VoidCallback onMenuPressed;
 
   const HeroSection({
     super.key,
-    required this.onGalleryPressed,
+    required this.onMenuPressed,
   });
 
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       height: 650,
       width: double.infinity,
@@ -19,25 +20,26 @@ import 'package:dunkcoffeeco/constants/colors.dart';
       child: Stack(
         children: [
           Positioned(
-  top: 0,
-  left: 0,
-  right: 0,
-  child: Container(
-    height: 42,
-    color: Colors.black,
-    child: const Center(
-      child: Text(
-        'SPECIALTY COFFEE • FRESHLY BAKED • PREMIUM BEANS • EST. 2026 •',
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 11,
-          fontWeight: FontWeight.bold,
-          letterSpacing: 2,
-        ),
-      ),
-    ),
-  ),
-),
+            top: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              height: 42,
+              color: Colors.black,
+              child: const Center(
+                child: Text(
+                  'SPECIALTY COFFEE • FRESHLY BAKED • PREMIUM BEANS • EST. 2026 •',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 2,
+                  ),
+                ),
+              ),
+            ),
+          ),
+
           Positioned(
             bottom: -50,
             left: 100,
@@ -51,10 +53,11 @@ import 'package:dunkcoffeeco/constants/colors.dart';
               ),
             ),
           ),
+
           Padding(
             padding: const EdgeInsets.only(
               left: 80,
-              right:80,
+              right: 80,
               top: 40,
             ),
             child: Row(
@@ -81,6 +84,7 @@ import 'package:dunkcoffeeco/constants/colors.dart';
                           ),
                         ),
                       ),
+
                       const SizedBox(height: 25),
 
                       RichText(
@@ -88,12 +92,16 @@ import 'package:dunkcoffeeco/constants/colors.dart';
                           style: TextStyle(
                             fontSize: 52,
                             fontWeight: FontWeight.bold,
-                            color: isDark ? Colors.white : AppColors.textDark,
+                            color: isDark
+                                ? Colors.white
+                                : AppColors.textDark,
                             height: 1.1,
                             letterSpacing: -0.5,
                           ),
                           children: const [
-                            TextSpan(text: 'Kahvenin\n'),
+                            TextSpan(
+                              text: 'Kahvenin\n',
+                            ),
                             TextSpan(
                               text: 'En İyi Hali.',
                               style: TextStyle(
@@ -111,7 +119,9 @@ import 'package:dunkcoffeeco/constants/colors.dart';
                         child: Text(
                           'Dunk Coffee’de her fincan; özenle seçilmiş çekirdekler, taze lezzetler ve samimi bir atmosferle buluşur. Güne güzel bir başlangıç yapmak ya da keyifli bir mola vermek için doğru adres.',
                           style: TextStyle(
-                            color: isDark ? Colors.white70 : Colors.grey,
+                            color: isDark
+                                ? Colors.white70
+                                : Colors.grey,
                             fontSize: 14,
                             height: 1.7,
                           ),
@@ -126,12 +136,6 @@ import 'package:dunkcoffeeco/constants/colors.dart';
                             context,
                             "MENÜYÜ İNCELE",
                             isRed: true,
-                          ),
-                          const SizedBox(width: 25),
-                          _buildShadowedButton(
-                            context,
-                            "ŞUBELERİMİZ",
-                            isRed: false,
                           ),
                         ],
                       ),
@@ -154,16 +158,21 @@ import 'package:dunkcoffeeco/constants/colors.dart';
                             height: 420,
                             decoration: BoxDecoration(
                               color: Colors.black,
-                              borderRadius: BorderRadius.circular(32),
+                              borderRadius:
+                                  BorderRadius.circular(32),
                             ),
                           ),
                         ),
+
                         Container(
                           width: 380,
                           height: 420,
                           decoration: BoxDecoration(
-                            color: isDark ? const Color(0xFF2A2A2A) : Colors.grey.shade300,
-                            borderRadius: BorderRadius.circular(32),
+                            color: isDark
+                                ? const Color(0xFF2A2A2A)
+                                : Colors.grey.shade300,
+                            borderRadius:
+                                BorderRadius.circular(32),
                             image: const DecorationImage(
                               image: AssetImage(
                                 'assets/images/coffee.png',
@@ -172,7 +181,7 @@ import 'package:dunkcoffeeco/constants/colors.dart';
                             ),
                           ),
                         ),
-                      ],
+                                              ],
                     ),
                   ),
                 ),
@@ -185,55 +194,70 @@ import 'package:dunkcoffeeco/constants/colors.dart';
   }
 
   Widget _buildShadowedButton(
-  BuildContext context,
-  String label, {
-  required bool isRed,
-}) {
-  final isDark = Theme.of(context).brightness == Brightness.dark; {
-    return Stack(
-      children: [
-        Transform.translate(
-          offset: const Offset(4, 4),
-          child: Container(
-            width: 180,
-            height: 54,
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.circular(30),
-            ),
-          ),
-        ),
-                Container(
-          width: 180,
-          height: 54,
-          decoration: BoxDecoration(
-            color: isRed
-    ? AppColors.primaryRed
-    : (isDark ? const Color(0xFF2A2A2A) : Colors.white),
-            borderRadius: BorderRadius.circular(30),
-            border: isRed
-                ? null
-                : Border.all(
-                    color: isDark ? Colors.white24 : Colors.black,
-                    width: 1.5,
-                  ),
-          ),
-          child: Center(
-            child: Text(
-              label,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: isRed
-    ? Colors.white
-    : (isDark ? Colors.white : AppColors.textDark),
-                fontWeight: FontWeight.bold,
-                fontSize: 11,
-                letterSpacing: 0.5,
+    BuildContext context,
+    String label, {
+    required bool isRed,
+  }) {
+    final isDark =
+        Theme.of(context).brightness == Brightness.dark;
+
+    return GestureDetector(
+      onTap: () {
+        if (label == "MENÜYÜ İNCELE") {
+          onMenuPressed();
+        }
+      },
+      child: Stack(
+        children: [
+          Transform.translate(
+            offset: const Offset(4, 4),
+            child: Container(
+              width: 180,
+              height: 54,
+              decoration: BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.circular(30),
               ),
             ),
           ),
-        ),
-      ],
+          Container(
+            width: 180,
+            height: 54,
+            decoration: BoxDecoration(
+              color: isRed
+                  ? AppColors.primaryRed
+                  : (isDark
+                      ? const Color(0xFF2A2A2A)
+                      : Colors.white),
+              borderRadius: BorderRadius.circular(30),
+              border: isRed
+                  ? null
+                  : Border.all(
+                      color: isDark
+                          ? Colors.white24
+                          : Colors.black,
+                      width: 1.5,
+                    ),
+            ),
+            child: Center(
+              child: Text(
+                label,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: isRed
+                      ? Colors.white
+                      : (isDark
+                          ? Colors.white
+                          : AppColors.textDark),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 11,
+                  letterSpacing: 0.5,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
-}}
+}

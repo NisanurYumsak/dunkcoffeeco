@@ -296,16 +296,10 @@ class _DunkMainPageState extends State<DunkMainPage> {
 
 
                   HeroSection(
-                    onGalleryPressed: () {
-
-                      Scrollable.ensureVisible(
-                        galleryKey.currentContext!,
-                        duration:
-                            const Duration(
-                              milliseconds: 700,
-                            ),
-                      );
-
+                    onMenuPressed: () {
+                      setState((){
+                        activePageIndex = 1;
+                      });
                     },
                   ),
 
@@ -321,18 +315,13 @@ class _DunkMainPageState extends State<DunkMainPage> {
 
 
 
-                  Container(
-
-                    key: galleryKey,
-
-                    child:
-                        SocialGallerySection(),
-
-                  ),
-
-
-
-                  FooterSection(),
+                  FooterSection(
+  onGalleryPressed: () {
+    setState(() {
+      activePageIndex = 2;
+    });
+  },
+),
 
 
                 ],
@@ -341,9 +330,12 @@ class _DunkMainPageState extends State<DunkMainPage> {
 
 
 
-          : SingleChildScrollView(
-    child: const FullMenuPage(),
-  ),
+          : activePageIndex == 1
+              ? const FullMenuPage()
+              :SingleChildScrollView(
+                child: const SocialGallerySection(),
+              ),
+  
 
 
 
