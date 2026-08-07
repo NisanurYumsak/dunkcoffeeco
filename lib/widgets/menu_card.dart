@@ -13,9 +13,15 @@ class MenuCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final screenWidth = MediaQuery.of(context).size.width;
+    // Mobilde, yatay padding (20+20) dışında kalan alanı aşmasın diye
+    // kart genişliğini ekrana göre sınırlıyoruz.
+    final cardWidth = screenWidth < 700
+        ? (screenWidth - 40).clamp(0, 340).toDouble()
+        : 340.0;
 
     return Container(
-      width: 340,
+      width: cardWidth,
       decoration: BoxDecoration(
         color: isDark ? Colors.black : Colors.white,
         borderRadius: BorderRadius.circular(24),

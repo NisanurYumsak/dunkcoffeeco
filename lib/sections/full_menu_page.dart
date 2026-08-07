@@ -25,12 +25,15 @@ class FullMenuPage extends StatelessWidget {
     final desserts =
         menuItems.where((item) => item.category == "dessert").toList();
 
-    return Container(
+    return LayoutBuilder(builder: (context, constraints) {
+      final isMobile = constraints.maxWidth < 700;
+
+      return Container(
       width: double.infinity,
       color: Theme.of(context).scaffoldBackgroundColor,
-      padding: const EdgeInsets.symmetric(
-        horizontal: 80,
-        vertical: 90,
+      padding: EdgeInsets.symmetric(
+        horizontal: isMobile ? 20 : 80,
+        vertical: isMobile ? 50 : 90,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -51,7 +54,7 @@ class FullMenuPage extends StatelessWidget {
             "Her Fincanda Özen,\nHer Lokmada Lezzet",
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 46,
+              fontSize: isMobile ? 30 : 46,
               fontWeight: FontWeight.bold,
               color: isDark ? Colors.white : AppColors.textDark,
               height: 1.2,
@@ -61,7 +64,7 @@ class FullMenuPage extends StatelessWidget {
           const SizedBox(height: 18),
 
           SizedBox(
-            width: 700,
+            width: isMobile ? double.infinity : 700,
             child: Text(
               "Dunk Coffee'nin özenle hazırlanan kahveleri, "
               "serinleten içecekleri, taptaze sandviçleri "
@@ -155,7 +158,10 @@ class FullMenuPage extends StatelessWidget {
         ],
       ),
     );
-  }  Widget _title(BuildContext context, String text) {
+    });
+  }
+
+  Widget _title(BuildContext context, String text) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Align(

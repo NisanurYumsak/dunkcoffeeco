@@ -8,64 +8,95 @@ class ColdDessertSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(
-        horizontal: 80,
-        vertical: 90,
-      ),
-      color: Theme.of(context).scaffoldBackgroundColor,
-      child: Column(
-        children: [
-          Text(
-            "Sadece Kahve Değil, Daha Fazlası",
-            style: TextStyle(
-              fontSize: 42,
-              fontWeight: FontWeight.bold,
-              color: isDark ? Colors.white : AppColors.textDark,
-            ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isMobile = constraints.maxWidth < 700;
+
+        return Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(
+            horizontal: isMobile ? 20 : 80,
+            vertical: isMobile ? 50 : 90,
           ),
-
-          const SizedBox(height: 15),
-
-          Text(
-            "Dunk Coffee deneyimini soğuk içeceklerimiz ve özenle hazırlanan tatlılarımızla tamamlıyoruz.",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 15,
-              color: isDark ? Colors.white70 : Colors.grey,
-              height: 1.6,
-            ),
-          ),
-
-          const SizedBox(height: 60),
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          color: Theme.of(context).scaffoldBackgroundColor,
+          child: Column(
             children: [
-              _buildExperienceCard(
-                context: context,
-                image: "assets/images/sogukicecek.png",
-                title: "Serinleten Lezzetler",
-                description:
-                    "Sıcak günlerde ferahlatan soğuk içeceklerimizle kahve keyfini farklı bir deneyime dönüştürüyoruz.",
-                icon: Icons.local_drink,
+              Text(
+                "Sadece Kahve Değil, Daha Fazlası",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: isMobile ? 28 : 42,
+                  fontWeight: FontWeight.bold,
+                  color: isDark ? Colors.white : AppColors.textDark,
+                ),
               ),
 
-              const SizedBox(width: 40),
+              const SizedBox(height: 15),
 
-              _buildExperienceCard(
-                context: context,
-                image: "assets/images/tatli.png",
-                title: "Tatlı Molaları",
-                description:
-                    "Kahvenize eşlik eden taze tatlılarımızla her anınıza küçük ve özel bir mutluluk katıyoruz.",
-                icon: Icons.cake,
+              Text(
+                "Dunk Coffee deneyimini soğuk içeceklerimiz ve özenle hazırlanan tatlılarımızla tamamlıyoruz.",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 15,
+                  color: isDark ? Colors.white70 : Colors.grey,
+                  height: 1.6,
+                ),
               ),
+
+              SizedBox(height: isMobile ? 30 : 60),
+
+              isMobile
+                  ? Column(
+                      children: [
+                        _buildExperienceCard(
+                          context: context,
+                          image: "assets/images/sogukicecek.png",
+                          title: "Serinleten Lezzetler",
+                          description:
+                              "Sıcak günlerde ferahlatan soğuk içeceklerimizle kahve keyfini farklı bir deneyime dönüştürüyoruz.",
+                          icon: Icons.local_drink,
+                          isMobile: true,
+                        ),
+                        const SizedBox(height: 30),
+                        _buildExperienceCard(
+                          context: context,
+                          image: "assets/images/tatli.png",
+                          title: "Tatlı Molaları",
+                          description:
+                              "Kahvenize eşlik eden taze tatlılarımızla her anınıza küçük ve özel bir mutluluk katıyoruz.",
+                          icon: Icons.cake,
+                          isMobile: true,
+                        ),
+                      ],
+                    )
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _buildExperienceCard(
+                          context: context,
+                          image: "assets/images/sogukicecek.png",
+                          title: "Serinleten Lezzetler",
+                          description:
+                              "Sıcak günlerde ferahlatan soğuk içeceklerimizle kahve keyfini farklı bir deneyime dönüştürüyoruz.",
+                          icon: Icons.local_drink,
+                          isMobile: false,
+                        ),
+                        const SizedBox(width: 40),
+                        _buildExperienceCard(
+                          context: context,
+                          image: "assets/images/tatli.png",
+                          title: "Tatlı Molaları",
+                          description:
+                              "Kahvenize eşlik eden taze tatlılarımızla her anınıza küçük ve özel bir mutluluk katıyoruz.",
+                          icon: Icons.cake,
+                          isMobile: false,
+                        ),
+                      ],
+                    ),
             ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 
@@ -75,12 +106,13 @@ class ColdDessertSection extends StatelessWidget {
     required String title,
     required String description,
     required IconData icon,
+    required bool isMobile,
   }) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
-      width: 500,
-      height: 700,
+      width: isMobile ? double.infinity : 500,
+      height: isMobile ? null : 700,
       padding: const EdgeInsets.all(30),
       decoration: BoxDecoration(
         color: isDark ? AppColors.darkCard : Colors.white,
@@ -94,12 +126,13 @@ class ColdDessertSection extends StatelessWidget {
         ],
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: SizedBox(
               width: double.infinity,
-              height: 420,
+              height: isMobile ? 280 : 420,
               child: Image.asset(
                 image,
                 fit: BoxFit.contain,

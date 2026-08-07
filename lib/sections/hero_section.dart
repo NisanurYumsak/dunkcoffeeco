@@ -13,183 +13,191 @@ class HeroSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return Container(
-      height: 650,
-      width: double.infinity,
-      color: Theme.of(context).scaffoldBackgroundColor,
-      child: Stack(
-        children: [
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              height: 42,
-              color: Colors.black,
-              child: const Center(
-                child: Text(
-                  'SPECIALTY COFFEE • FRESHLY BAKED • PREMIUM BEANS • EST. 2026 •',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 11,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 2,
-                  ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isMobile = constraints.maxWidth < 700;
+
+        final textColumn = Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12,
+                vertical: 6,
+              ),
+              color: AppColors.primaryRed,
+              child: const Text(
+                'ÖZENLE HAZIRLANAN HER FİNCAN',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.5,
                 ),
               ),
             ),
-          ),
 
-          Positioned(
-            bottom: -50,
-            left: 100,
-            right: 100,
-            child: Opacity(
-              opacity: 0.05,
-              child: Image.network(
-                'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=600',
-                fit: BoxFit.contain,
-                height: 450,
+            const SizedBox(height: 25),
+
+            RichText(
+              text: TextSpan(
+                style: TextStyle(
+                  fontSize: isMobile ? 34 : 52,
+                  fontWeight: FontWeight.bold,
+                  color: isDark ? Colors.white : AppColors.textDark,
+                  height: 1.1,
+                  letterSpacing: -0.5,
+                ),
+                children: const [
+                  TextSpan(text: 'Kahvenin\n'),
+                  TextSpan(
+                    text: 'En İyi Hali.',
+                    style: TextStyle(color: AppColors.primaryRed),
+                  ),
+                ],
               ),
             ),
-          ),
 
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 80,
-              right: 80,
-              top: 40,
+            const SizedBox(height: 20),
+
+            SizedBox(
+              width: isMobile ? double.infinity : 430,
+              child: Text(
+                'Dunk Coffee’de her fincan; özenle seçilmiş çekirdekler, taze lezzetler ve samimi bir atmosferle buluşur. Güne güzel bir başlangıç yapmak ya da keyifli bir mola vermek için doğru adres.',
+                style: TextStyle(
+                  color: isDark ? Colors.white70 : Colors.grey,
+                  fontSize: 14,
+                  height: 1.7,
+                ),
+              ),
             ),
-            child: Row(
+
+            const SizedBox(height: 45),
+
+            Row(
               children: [
-                Expanded(
-                  flex: 12,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 6,
-                        ),
-                        color: AppColors.primaryRed,
-                        child: const Text(
-                          'ÖZENLE HAZIRLANAN HER FİNCAN',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1.5,
-                          ),
-                        ),
-                      ),
+                _buildShadowedButton(
+                  context,
+                  "MENÜYÜ İNCELE",
+                  isRed: true,
+                ),
+              ],
+            ),
+          ],
+        );
 
-                      const SizedBox(height: 25),
-
-                      RichText(
-                        text: TextSpan(
-                          style: TextStyle(
-                            fontSize: 52,
-                            fontWeight: FontWeight.bold,
-                            color: isDark
-                                ? Colors.white
-                                : AppColors.textDark,
-                            height: 1.1,
-                            letterSpacing: -0.5,
-                          ),
-                          children: const [
-                            TextSpan(
-                              text: 'Kahvenin\n',
-                            ),
-                            TextSpan(
-                              text: 'En İyi Hali.',
-                              style: TextStyle(
-                                color: AppColors.primaryRed,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      const SizedBox(height: 20),
-
-                      SizedBox(
-                        width: 430,
-                        child: Text(
-                          'Dunk Coffee’de her fincan; özenle seçilmiş çekirdekler, taze lezzetler ve samimi bir atmosferle buluşur. Güne güzel bir başlangıç yapmak ya da keyifli bir mola vermek için doğru adres.',
-                          style: TextStyle(
-                            color: isDark
-                                ? Colors.white70
-                                : Colors.grey,
-                            fontSize: 14,
-                            height: 1.7,
-                          ),
-                        ),
-                      ),
-
-                      const SizedBox(height: 45),
-
-                      Row(
-                        children: [
-                          _buildShadowedButton(
-                            context,
-                            "MENÜYÜ İNCELE",
-                            isRed: true,
-                          ),
-                        ],
-                      ),
-                    ],
+        final imageStack = Center(
+          child: SizedBox(
+            width: isMobile ? 300 : 500,
+            height: isMobile ? 300 : 500,
+            child: Stack(
+              clipBehavior: Clip.none,
+              alignment: Alignment.center,
+              children: [
+                Transform.translate(
+                  offset: const Offset(16, 16),
+                  child: Container(
+                    width: isMobile ? 230 : 380,
+                    height: isMobile ? 260 : 420,
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(32),
+                    ),
                   ),
                 ),
-
-                const SizedBox(width: 40),
-
-                Expanded(
-                  flex: 10,
-                  child: Center(
-                    child: Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        Transform.translate(
-                          offset: const Offset(16, 16),
-                          child: Container(
-                            width: 380,
-                            height: 420,
-                            decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius:
-                                  BorderRadius.circular(32),
-                            ),
-                          ),
-                        ),
-
-                        Container(
-                          width: 380,
-                          height: 420,
-                          decoration: BoxDecoration(
-                            color: isDark
-                                ? const Color(0xFF2A2A2A)
-                                : Colors.grey.shade300,
-                            borderRadius:
-                                BorderRadius.circular(32),
-                            image: const DecorationImage(
-                              image: AssetImage(
-                                'assets/images/coffee.png',
-                              ),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                                              ],
+                Container(
+                  width: isMobile ? 230 : 380,
+                  height: isMobile ? 260 : 420,
+                  decoration: BoxDecoration(
+                    color: isDark
+                        ? const Color(0xFF2A2A2A)
+                        : Colors.grey.shade300,
+                    borderRadius: BorderRadius.circular(32),
+                    image: const DecorationImage(
+                      image: AssetImage("assets/images/coffee.png"),
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
               ],
             ),
           ),
-        ],
-      ),
+        );
+
+        return Container(
+          height: isMobile ? null : 650,
+          width: double.infinity,
+          color: Theme.of(context).scaffoldBackgroundColor,
+          child: Stack(
+            children: [
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  height: 42,
+                  color: Colors.black,
+                  child: const Center(
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        'SPECIALTY COFFEE • FRESHLY BAKED • PREMIUM BEANS • EST. 2026 •',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 2,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              if (!isMobile)
+                Positioned(
+                  bottom: -50,
+                  left: 100,
+                  right: 100,
+                  child: Opacity(
+                    opacity: 0.05,
+                    child: Image.network(
+                      'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=600',
+                      fit: BoxFit.contain,
+                      height: 450,
+                    ),
+                  ),
+                ),
+
+              Padding(
+                padding: EdgeInsets.only(
+                  left: isMobile ? 20 : 80,
+                  right: isMobile ? 20 : 80,
+                  top: isMobile ? 70 : 40,
+                  bottom: isMobile ? 40 : 0,
+                ),
+                child: isMobile
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          textColumn,
+                          const SizedBox(height: 40),
+                          imageStack,
+                        ],
+                      )
+                    : Row(
+                        children: [
+                          Expanded(flex: 12, child: textColumn),
+                          const SizedBox(width: 40),
+                          Expanded(flex: 10, child: imageStack),
+                        ],
+                      ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -198,8 +206,7 @@ class HeroSection extends StatelessWidget {
     String label, {
     required bool isRed,
   }) {
-    final isDark =
-        Theme.of(context).brightness == Brightness.dark;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return GestureDetector(
       onTap: () {
@@ -226,16 +233,12 @@ class HeroSection extends StatelessWidget {
             decoration: BoxDecoration(
               color: isRed
                   ? AppColors.primaryRed
-                  : (isDark
-                      ? const Color(0xFF2A2A2A)
-                      : Colors.white),
+                  : (isDark ? const Color(0xFF2A2A2A) : Colors.white),
               borderRadius: BorderRadius.circular(30),
               border: isRed
                   ? null
                   : Border.all(
-                      color: isDark
-                          ? Colors.white24
-                          : Colors.black,
+                      color: isDark ? Colors.white24 : Colors.black,
                       width: 1.5,
                     ),
             ),
@@ -246,9 +249,7 @@ class HeroSection extends StatelessWidget {
                 style: TextStyle(
                   color: isRed
                       ? Colors.white
-                      : (isDark
-                          ? Colors.white
-                          : AppColors.textDark),
+                      : (isDark ? Colors.white : AppColors.textDark),
                   fontWeight: FontWeight.bold,
                   fontSize: 11,
                   letterSpacing: 0.5,

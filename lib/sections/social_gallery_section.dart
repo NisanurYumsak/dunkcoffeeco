@@ -22,11 +22,13 @@ class SocialGallerySection extends StatelessWidget {
       crossAxisCount = 2;
     }
 
+    final isMobile = screenWidth < 700;
+
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(
-        horizontal: 80,
-        vertical: 80,
+      padding: EdgeInsets.symmetric(
+        horizontal: isMobile ? 20 : 80,
+        vertical: isMobile ? 50 : 80,
       ),
       color: Theme.of(context).scaffoldBackgroundColor,
       child: Column(
@@ -55,15 +57,13 @@ class SocialGallerySection extends StatelessWidget {
           const SizedBox(height: 18),
 
           SizedBox(
-            width: 650,
+            width: isMobile ? double.infinity : 650,
             child: Text(
               "Dunk Coffee'de hazırlanan her fincanın arkasında sıcak bir hikâye var. İşte en güzel anlarımız.",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,
-                color: isDark
-                    ? Colors.white70
-                    : Colors.black54,
+                color: isDark ? Colors.white70 : Colors.black54,
                 height: 1.7,
               ),
             ),
@@ -75,39 +75,65 @@ class SocialGallerySection extends StatelessWidget {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: images.length,
-            gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: crossAxisCount,
               crossAxisSpacing: 24,
               mainAxisSpacing: 24,
               childAspectRatio: 1,
             ),
             itemBuilder: (context, index) {
-  return GestureDetector(
-    onTap: () {
-      showDialog(
-        context: context,
-        builder: (_) => Dialog(
-          backgroundColor: Colors.transparent,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(24),
-            child: Image.asset(
-              images[index],
-              fit: BoxFit.contain,
-            ),
-          ),
-        ),
-      );
-    },
-    child: ClipRRect(
-      borderRadius: BorderRadius.circular(22),
-      child: Image.asset(
-        images[index],
-        fit: BoxFit.cover,
-      ),
-    ),
-  );
-},
+              return GestureDetector(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (_) => Dialog(
+                      backgroundColor: Colors.transparent,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(24),
+                        child: Image.asset(
+                          images[index],
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ),
+                  );
+                },
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(22),
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      Image.asset(
+                        images[index],
+                        fit: BoxFit.cover,
+                      ),
+                      Positioned(
+                        top: 12,
+                        right: 12,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 5,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.55),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: const Text(
+                            "@dunkcoffee.co",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
           ),
         ],
       ),

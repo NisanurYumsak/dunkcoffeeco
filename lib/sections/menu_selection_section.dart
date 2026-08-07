@@ -8,61 +8,74 @@ class MenuSelectionSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 60),
-      color: Theme.of(context).scaffoldBackgroundColor,
-      child: Column(
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isMobile = constraints.maxWidth < 700;
+
+        final signatureCard = _buildMenuCard(
+          context: context,
+          title: "SIGNATURE COFFEE",
+          titleColor: Colors.white,
+          bgColor: AppColors.primaryRed,
+          items: [
+            {"name": "Espresso", "price": "\$4"},
+            {"name": "Cappuccino", "price": "\$5"},
+            {"name": "Latte", "price": "\$5"},
+            {"name": "Americano", "price": "\$4"},
+          ],
+        );
+
+        final specialCard = _buildMenuCard(
+          context: context,
+          title: "SPECIAL DRINKS",
+          titleColor: isDark ? AppColors.textLight : AppColors.textDark,
+          bgColor: isDark ? AppColors.darkCard : Colors.white,
+          items: [
+            {"name": "Vanilla Latte", "price": "\$6"},
+            {"name": "Caramel Macchiato", "price": "\$6"},
+            {"name": "Mocha", "price": "\$5"},
+            {"name": "Cold Brew", "price": "\$5"},
+          ],
+        );
+
+        final imageCard = _buildImageCard(
+          context,
+          "Fresh Coffee Beans",
+          "https://images.unsplash.com/photo-1447933601403-0c6688de566e",
+        );
+
+        return Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: isMobile ? 20 : 80,
+            vertical: isMobile ? 40 : 60,
+          ),
+          color: Theme.of(context).scaffoldBackgroundColor,
+          child: Column(
             children: [
-              Expanded(
-                child: _buildMenuCard(
-                  context: context,
-                  title: "SIGNATURE COFFEE",
-                  titleColor: Colors.white,
-                  bgColor: AppColors.primaryRed,
-                  items: [
-                    {"name": "Espresso", "price": "\$4"},
-                    {"name": "Cappuccino", "price": "\$5"},
-                    {"name": "Latte", "price": "\$5"},
-                    {"name": "Americano", "price": "\$4"},
-                  ],
-                ),
-              ),
-
-              const SizedBox(width: 30),
-
-              Expanded(
-                child: _buildMenuCard(
-                  context: context,
-                  title: "SPECIAL DRINKS",
-                  titleColor:
-                      isDark ? AppColors.textLight : AppColors.textDark,
-                  bgColor:
-                      isDark ? AppColors.darkCard : Colors.white,
-                  items: [
-                    {"name": "Vanilla Latte", "price": "\$6"},
-                    {"name": "Caramel Macchiato", "price": "\$6"},
-                    {"name": "Mocha", "price": "\$5"},
-                    {"name": "Cold Brew", "price": "\$5"},
-                  ],
-                ),
-              ),
-
-              const SizedBox(width: 30),
-
-              Expanded(
-                child: _buildImageCard(
-                  context,
-                  "Fresh Coffee Beans",
-                  "https://images.unsplash.com/photo-1447933601403-0c6688de566e",
-                ),
-              ),
+              isMobile
+                  ? Column(
+                      children: [
+                        SizedBox(height: 230, child: signatureCard),
+                        const SizedBox(height: 30),
+                        SizedBox(height: 260, child: specialCard),
+                        const SizedBox(height: 30),
+                        SizedBox(height: 245, child: imageCard),
+                      ],
+                    )
+                  : Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(child: signatureCard),
+                        const SizedBox(width: 30),
+                        Expanded(child: specialCard),
+                        const SizedBox(width: 30),
+                        Expanded(child: imageCard),
+                      ],
+                    ),
             ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 

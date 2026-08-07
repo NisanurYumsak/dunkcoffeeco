@@ -22,8 +22,7 @@ class VisitUsSection extends StatelessWidget {
           const SizedBox(height: 20),
           Text(
             'Haftanın her günü taze kahve kokusuyla buradayız.',
-            style: TextStyle(color: AppColors.textDark.withOpacity(0.7)),
-          ),
+            style: TextStyle(color: AppColors.textDark.withValues(alpha: 0.7),)),
         ],
       ),
     );

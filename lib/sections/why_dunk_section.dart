@@ -8,74 +8,78 @@ class WhyDunkSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(
-        horizontal: 80,
-        vertical: 90,
-      ),
-      color: Theme.of(context).scaffoldBackgroundColor,
-      child: Column(
-        children: [
-          Text(
-            "Neden Dunk Coffee?",
-            style: TextStyle(
-              fontSize: 42,
-              fontWeight: FontWeight.bold,
-              color: isDark ? Colors.white : AppColors.textDark,
-            ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isMobile = constraints.maxWidth < 700;
+
+        return Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(
+            horizontal: isMobile ? 20 : 80,
+            vertical: isMobile ? 50 : 90,
           ),
-
-          const SizedBox(height: 15),
-
-          Text(
-            "Kaliteli çekirdekler, özenli hazırlık ve sıcak bir kahve deneyimi için buradayız.",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: isDark ? Colors.white70 : Colors.grey,
-              fontSize: 15,
-              height: 1.6,
-            ),
-          ),
-
-          const SizedBox(height: 60),
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          color: Theme.of(context).scaffoldBackgroundColor,
+          child: Column(
             children: [
-              _buildCard(
-                context: context,
-                image: "assets/images/cekirdek.png",
-                icon: Icons.coffee,
-                title: "Özel Çekirdekler",
-                text:
-                    "Dünyanın farklı bölgelerinden seçilen kaliteli kahve çekirdekleri.",
+              Text(
+                "Neden Dunk Coffee?",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: isMobile ? 28 : 42,
+                  fontWeight: FontWeight.bold,
+                  color: isDark ? Colors.white : AppColors.textDark,
+                ),
               ),
 
-              const SizedBox(width: 30),
+              const SizedBox(height: 15),
 
-              _buildCard(
-                context: context,
-                image: "assets/images/tazekavrum.png",
-                icon: Icons.local_fire_department,
-                title: "Taze Kavrum",
-                text: "Her fincanda taze ve dengeli bir kahve aroması.",
+              Text(
+                "Kaliteli çekirdekler, özenli hazırlık ve sıcak bir kahve deneyimi için buradayız.",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: isDark ? Colors.white70 : Colors.grey,
+                  fontSize: 15,
+                  height: 1.6,
+                ),
               ),
 
-              const SizedBox(width: 30),
+              SizedBox(height: isMobile ? 30 : 60),
 
-              _buildCard(
-                context: context,
-                image: "assets/images/ozenliservis.png",
-                icon: Icons.favorite,
-                title: "Özenli Servis",
-                text:
-                    "Kahveyi sadece içecek değil, deneyim olarak görüyoruz.",
+              // Wrap: sığmayan kartları otomatik olarak alt satıra kaydırır
+              Wrap(
+                alignment: WrapAlignment.center,
+                spacing: 30,
+                runSpacing: 30,
+                children: [
+                  _buildCard(
+                    context: context,
+                    image: "assets/images/cekirdek.png",
+                    icon: Icons.coffee,
+                    title: "Özel Çekirdekler",
+                    text:
+                        "Dünyanın farklı bölgelerinden seçilen kaliteli kahve çekirdekleri.",
+                  ),
+                  _buildCard(
+                    context: context,
+                    image: "assets/images/tazekavrum.png",
+                    icon: Icons.local_fire_department,
+                    title: "Taze Kavrum",
+                    text: "Her fincanda taze ve dengeli bir kahve aroması.",
+                  ),
+                  _buildCard(
+                    context: context,
+                    image: "assets/images/ozenliservis.png",
+                    icon: Icons.favorite,
+                    title: "Özenli Servis",
+                    text:
+                        "Kahveyi sadece içecek değil, deneyim olarak görüyoruz.",
+                  ),
+                ],
               ),
             ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 
