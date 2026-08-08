@@ -8,6 +8,7 @@ import 'package:dunkcoffeeco/sections/social_gallery_section.dart';
 import 'package:dunkcoffeeco/sections/footer_section.dart';
 import 'package:dunkcoffeeco/sections/full_menu_page.dart';
 import 'package:dunkcoffeeco/sections/cold_dessert_section.dart';
+import 'package:dunkcoffeeco/sections/contact_page.dart';
 
 void main() {
   runApp(const DunkCoffeeApp());
@@ -97,20 +98,6 @@ void scrollTo(GlobalKey key) {
   }
 }
 
-  Widget _buildContactDialog(BuildContext context) {
-    return AlertDialog(
-      title: const Text("İletişim Bilgileri"),
-      content: const Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text("📍 Hacıhalil, 1212. Sk. No:5, 41400 Gebze/Kocaeli"),
-          SizedBox(height: 8),
-          Text("📞 0507 992 21 06"),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, outerConstraints) {
@@ -177,11 +164,8 @@ void scrollTo(GlobalKey key) {
                         ),
                       ),
                       onTap: () {
+                        setState(() => activePageIndex = 3);
                         Navigator.pop(context);
-                        showDialog(
-                          context: context,
-                          builder: (context) => _buildContactDialog(context),
-                        );
                       },
                     ),
                   ],
@@ -249,10 +233,9 @@ void scrollTo(GlobalKey key) {
                     const SizedBox(width: 20),
                     ElevatedButton(
                       onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) => _buildContactDialog(context),
-                        );
+                        setState(() {
+                          activePageIndex = 3;
+                        });
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primaryRed,
@@ -330,22 +313,9 @@ void scrollTo(GlobalKey key) {
     },
 
    onContactPressed: () {
-  showDialog(
-    context: context,
-    builder: (context) {
-      return const AlertDialog(
-        title: Text("İletişim Bilgileri"),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text("📍 Hacıhalil, 1212. Sk. No:5, 41400 Gebze/Kocaeli"),
-            SizedBox(height: 8),
-            Text("📞 0507 992 21 06"),
-          ],
-        ),
-      );
-    },
-  );
+  setState(() {
+    activePageIndex = 3;
+  });
 },
   ),
 ),
@@ -356,9 +326,13 @@ void scrollTo(GlobalKey key) {
               ? SingleChildScrollView(
                   child: const FullMenuPage(),
                 )
-              : const SingleChildScrollView(
-                  child: SocialGallerySection(),
-                ),
+              : activePageIndex == 2
+                  ? const SingleChildScrollView(
+                      child: SocialGallerySection(),
+                    )
+                  : const SingleChildScrollView(
+                      child: ContactPage(),
+                    ),
     );
     });
   }
