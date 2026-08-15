@@ -187,7 +187,7 @@ class FooterSection extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: Image.asset(
-                  "assets/images/map.png",
+                  "assets/images/location.png",
                   width: isMobile ? double.infinity : 260,
                   height: 140,
                   fit: BoxFit.cover,

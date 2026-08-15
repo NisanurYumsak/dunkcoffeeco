@@ -6,6 +6,25 @@ import 'package:dunkcoffeeco/widgets/menu_card.dart';
 class FullMenuPage extends StatelessWidget {
   const FullMenuPage({super.key});
 
+  // Her kategori bölümüne kaydırmak için kullanılan anahtarlar.
+  static final GlobalKey _coffeeKey = GlobalKey();
+  static final GlobalKey _icedKey = GlobalKey();
+  static final GlobalKey _drinkKey = GlobalKey();
+  static final GlobalKey _sandwichKey = GlobalKey();
+  static final GlobalKey _dessertKey = GlobalKey();
+
+  void _scrollTo(GlobalKey key) {
+    final ctx = key.currentContext;
+    if (ctx != null) {
+      Scrollable.ensureVisible(
+        ctx,
+        duration: const Duration(milliseconds: 600),
+        curve: Curves.easeInOut,
+        alignment: 0.05,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -86,17 +105,37 @@ class FullMenuPage extends StatelessWidget {
             spacing: 18,
             runSpacing: 18,
             children: [
-              _buildCategoryChip(context, "☕ Kahveler"),
-              _buildCategoryChip(context, "🧊 Soğuk Kahveler"),
-              _buildCategoryChip(context, "🍹 Soğuk İçecekler"),
-              _buildCategoryChip(context, "🥪 Sandviçler"),
-              _buildCategoryChip(context, "🍰 Tatlılar"),
+              _buildCategoryChip(
+                context,
+                "☕ Kahveler",
+                onTap: () => _scrollTo(_coffeeKey),
+              ),
+              _buildCategoryChip(
+                context,
+                "🧊 Soğuk Kahveler",
+                onTap: () => _scrollTo(_icedKey),
+              ),
+              _buildCategoryChip(
+                context,
+                "🍹 Soğuk İçecekler",
+                onTap: () => _scrollTo(_drinkKey),
+              ),
+              _buildCategoryChip(
+                context,
+                "🥪 Sandviçler",
+                onTap: () => _scrollTo(_sandwichKey),
+              ),
+              _buildCategoryChip(
+                context,
+                "🍰 Tatlılar",
+                onTap: () => _scrollTo(_dessertKey),
+              ),
             ],
           ),
 
           const SizedBox(height: 80),
 
-          _title(context, "☕ Kahveler"),
+          _title(context, "☕ Kahveler", key: _coffeeKey),
           _description(context, "Espresso bazlı sıcak kahveler."),
           const SizedBox(height: 35),
 
@@ -108,7 +147,7 @@ class FullMenuPage extends StatelessWidget {
 
           const SizedBox(height: 90),
 
-          _title(context, "🧊 Soğuk Kahveler"),
+          _title(context, "🧊 Soğuk Kahveler", key: _icedKey),
           _description(context, "Serinleten espresso bazlı kahveler."),
           const SizedBox(height: 35),
 
@@ -121,7 +160,7 @@ class FullMenuPage extends StatelessWidget {
 
           const SizedBox(height: 90),
 
-          _title(context, "🍹 Soğuk İçecekler"),
+          _title(context, "🍹 Soğuk İçecekler", key: _drinkKey),
           _description(context, "Meyveli ve ferahlatıcı içecekler."),
           const SizedBox(height: 35),
 
@@ -133,7 +172,7 @@ class FullMenuPage extends StatelessWidget {
 
           const SizedBox(height: 90),
 
-          _title(context, "🥪 Sandviçler"),
+          _title(context, "🥪 Sandviçler", key: _sandwichKey),
           _description(context, "Günlük hazırlanan taptaze sandviçler."),
           const SizedBox(height: 35),
 
@@ -146,7 +185,7 @@ class FullMenuPage extends StatelessWidget {
 
           const SizedBox(height: 90),
 
-          _title(context, "🍰 Tatlılar"),
+          _title(context, "🍰 Tatlılar", key: _dessertKey),
           _description(context, "Kahvenizin yanına tatlı bir eşlikçi."),
           const SizedBox(height: 35),
 
@@ -161,10 +200,12 @@ class FullMenuPage extends StatelessWidget {
     });
   }
 
-  Widget _title(BuildContext context, String text) {
+  Widget _title(BuildContext context, String text, {Key? key}) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return Align(
+    return Container(
+      key: key,
+      width: double.infinity,
       alignment: Alignment.centerLeft,
       child: Text(
         text,
@@ -192,33 +233,41 @@ class FullMenuPage extends StatelessWidget {
     );
   }
 
-  Widget _buildCategoryChip(BuildContext context, String text) {
+  Widget _buildCategoryChip(
+    BuildContext context,
+    String text, {
+    required VoidCallback onTap,
+  }) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 22,
-        vertical: 12,
-      ),
-      decoration: BoxDecoration(
-        color: isDark
-            ? const Color(0xFF1E1E1E)
-            : Colors.white,
-        borderRadius: BorderRadius.circular(30),
-        border: Border.all(
-          color: isDark
-              ? Colors.white24
-              : Colors.black12,
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(30),
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 22,
+          vertical: 12,
         ),
-      ),
-      child: Text(
-        text,
-        style: TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w600,
+        decoration: BoxDecoration(
           color: isDark
-              ? Colors.white
-              : AppColors.textDark,
+              ? const Color(0xFF1E1E1E)
+              : Colors.white,
+          borderRadius: BorderRadius.circular(30),
+          border: Border.all(
+            color: isDark
+                ? Colors.white24
+                : Colors.black12,
+          ),
+        ),
+        child: Text(
+          text,
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+            color: isDark
+                ? Colors.white
+                : AppColors.textDark,
+          ),
         ),
       ),
     );

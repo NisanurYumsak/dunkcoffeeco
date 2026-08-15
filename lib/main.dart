@@ -67,11 +67,15 @@ class _DunkCoffeeAppState extends State<DunkCoffeeApp> {
 class DunkMainPage extends StatefulWidget {
   final VoidCallback changeTheme;
   final ThemeMode themeMode;
+  // Bu sayfa Navigator.push ile açıldığında hangi sekmeyle
+  // başlayacağını belirler (0: Ana Sayfa, 1: Menü, 2: Galeri, 3: Bize Ulaşın).
+  final int initialIndex;
 
   const DunkMainPage({
     super.key,
     required this.changeTheme,
     required this.themeMode,
+    this.initialIndex = 0,
   });
 
   @override
@@ -79,24 +83,58 @@ class DunkMainPage extends StatefulWidget {
 }
 
 class _DunkMainPageState extends State<DunkMainPage> {
-  int activePageIndex = 0;
+  late int activePageIndex = widget.initialIndex;
 
   final ScrollController _scrollController = ScrollController();
   final GlobalKey heroKey = GlobalKey();
-final GlobalKey aboutKey = GlobalKey();
-final GlobalKey menuKey = GlobalKey();
-final GlobalKey contactKey = GlobalKey();
+  final GlobalKey aboutKey = GlobalKey();
+  final GlobalKey menuKey = GlobalKey();
+  final GlobalKey contactKey = GlobalKey();
 
-void scrollTo(GlobalKey key) {
-  final context = key.currentContext;
-  if (context != null) {
-    Scrollable.ensureVisible(
-      context,
-      duration: const Duration(milliseconds: 700),
-      curve: Curves.easeInOut,
+  void scrollTo(GlobalKey key) {
+    final context = key.currentContext;
+    if (context != null) {
+      Scrollable.ensureVisible(
+        context,
+        duration: const Duration(milliseconds: 700),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
+  // ============================================================
+  // Gezinme yardımcıları — gerçek Navigator push/pop kullanır,
+  // böylece hem telefonda hem webde geri tuşu/tarayıcı geri
+  // butonu doğru şekilde bir önceki sekmeye döner.
+  // ============================================================
+
+  // Ana Sayfa'ya dönmek: yeni bir sayfa açmak yerine, geçmişte
+  // zaten var olan ilk (kök) sayfaya geri dön. Böylece "Ana
+  // Sayfa" geçmişte tekrar tekrar birikmez.
+  void _goHome() {
+    if (activePageIndex == 0) return;
+    Navigator.of(context).popUntil((route) => route.isFirst);
+  }
+
+  // Menü / Galeri / Bize Ulaşın gibi diğer sekmelere geçmek:
+  // yeni bir sayfa (route) push et, böylece geri tuşu/tarayıcı
+  // geri butonu bir önceki sekmeye dönebilir.
+  void _openPage(int index) {
+    if (index == 0) {
+      _goHome();
+      return;
+    }
+    if (index == activePageIndex) return;
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => DunkMainPage(
+          changeTheme: widget.changeTheme,
+          themeMode: widget.themeMode,
+          initialIndex: index,
+        ),
+      ),
     );
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -104,236 +142,218 @@ void scrollTo(GlobalKey key) {
       final isMobile = outerConstraints.maxWidth < 700;
 
       return Scaffold(
-      drawer: isMobile
-          ? Drawer(
-              child: SafeArea(
-                child: ListView(
-                  padding: EdgeInsets.zero,
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.all(20),
-                      child: Text(
-                        "DUNK COFFEE",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+        drawer: isMobile
+            ? Drawer(
+                child: SafeArea(
+                  child: ListView(
+                    padding: EdgeInsets.zero,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          "DUNK COFFEE",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.primaryRed,
+                          ),
+                        ),
+                      ),
+                      ListTile(
+                        title: const Text("Ana Sayfa"),
+                        onTap: () {
+                          Navigator.pop(context);
+                          _openPage(0);
+                        },
+                      ),
+                      ListTile(
+                        title: const Text("Menü"),
+                        onTap: () {
+                          Navigator.pop(context);
+                          _openPage(1);
+                        },
+                      ),
+                      ListTile(
+                        title: const Text("Galeri"),
+                        onTap: () {
+                          Navigator.pop(context);
+                          _openPage(2);
+                        },
+                      ),
+                      ListTile(
+                        leading: Icon(
+                          widget.themeMode == ThemeMode.light
+                              ? Icons.dark_mode
+                              : Icons.light_mode,
+                          color: AppColors.primaryRed,
+                        ),
+                        title: const Text("Karanlık Mod"),
+                        onTap: () {
+                          widget.changeTheme();
+                          Navigator.pop(context);
+                        },
+                      ),
+                      ListTile(
+                        title: const Text(
+                          "BİZE ULAŞIN",
+                          style: TextStyle(
+                            color: AppColors.primaryRed,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        onTap: () {
+                          Navigator.pop(context);
+                          _openPage(3);
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            : null,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(80),
+          child: Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: isMobile ? 16 : 80,
+              vertical: 20,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                InkWell(
+                  onTap: () => _openPage(0),
+                  child: const Text(
+                    "DUNK COFFEE",
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primaryRed,
+                    ),
+                  ),
+                ),
+                if (isMobile)
+                  Builder(
+                    builder: (context) => IconButton(
+                      icon: const Icon(Icons.menu, color: AppColors.primaryRed),
+                      onPressed: () => Scaffold.of(context).openDrawer(),
+                    ),
+                  )
+                else
+                  Row(
+                    children: [
+                      _buildNavButton(
+                        title: "Ana Sayfa",
+                        index: 0,
+                      ),
+                      _buildNavButton(
+                        title: "Menü",
+                        index: 1,
+                      ),
+                      _buildNavButton(
+                        title: "Galeri",
+                        index: 2,
+                      ),
+                      const SizedBox(width: 20),
+                      IconButton(
+                        onPressed: widget.changeTheme,
+                        icon: Icon(
+                          widget.themeMode == ThemeMode.light
+                              ? Icons.dark_mode
+                              : Icons.light_mode,
                           color: AppColors.primaryRed,
                         ),
                       ),
-                    ),
-                    ListTile(
-                      title: const Text("Ana Sayfa"),
-                      onTap: () {
-                        setState(() => activePageIndex = 0);
-                        Navigator.pop(context);
-                      },
-                    ),
-                    ListTile(
-                      title: const Text("Menü"),
-                      onTap: () {
-                        setState(() => activePageIndex = 1);
-                        Navigator.pop(context);
-                      },
-                    ),
-                    ListTile(
-                      title: const Text("Galeri"),
-                      onTap: () {
-                        setState(() => activePageIndex = 2);
-                        Navigator.pop(context);
-                      },
-                    ),
-                    ListTile(
-                      leading: Icon(
-                        widget.themeMode == ThemeMode.light
-                            ? Icons.dark_mode
-                            : Icons.light_mode,
-                        color: AppColors.primaryRed,
-                      ),
-                      title: const Text("Karanlık Mod"),
-                      onTap: () {
-                        widget.changeTheme();
-                        Navigator.pop(context);
-                      },
-                    ),
-                    ListTile(
-                      title: const Text(
-                        "BİZE ULAŞIN",
-                        style: TextStyle(
-                          color: AppColors.primaryRed,
-                          fontWeight: FontWeight.bold,
+                      const SizedBox(width: 20),
+                      ElevatedButton(
+                        onPressed: () => _openPage(3),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primaryRed,
+                        ),
+                        child: const Text(
+                          "BİZE ULAŞIN",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-                      onTap: () {
-                        setState(() => activePageIndex = 3);
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            )
-          : null,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(80),
-        child: Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: isMobile ? 16 : 80,
-            vertical: 20,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              InkWell(
-                onTap: () {
-                  setState(() {
-                    activePageIndex = 0;
-                  });
-                },
-                child: const Text(
-                  "DUNK COFFEE",
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.primaryRed,
+                    ],
                   ),
-                ),
-              ),
-              if (isMobile)
-                Builder(
-                  builder: (context) => IconButton(
-                    icon: const Icon(Icons.menu, color: AppColors.primaryRed),
-                    onPressed: () => Scaffold.of(context).openDrawer(),
-                  ),
-                )
-              else
-                Row(
-                  children: [
-                    _buildNavButton(
-                      title: "Ana Sayfa",
-                      index: 0,
-                    ),
-                    _buildNavButton(
-                      title: "Menü",
-                      index: 1,
-                    ),
-                    _buildNavButton(
-                      title: "Galeri",
-                      index: 2,
-                    ),
-                    const SizedBox(width: 20),
-                    IconButton(
-                      onPressed: widget.changeTheme,
-                      icon: Icon(
-                        widget.themeMode == ThemeMode.light
-                            ? Icons.dark_mode
-                            : Icons.light_mode,
-                        color: AppColors.primaryRed,
-                      ),
-                    ),
-                    const SizedBox(width: 20),
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          activePageIndex = 3;
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primaryRed,
-                      ),
-                      child: const Text(
-                        "BİZE ULAŞIN",
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-            ],
+              ],
+            ),
           ),
         ),
-      ),
-      body: activePageIndex == 0
-          ? SingleChildScrollView(
-              controller: _scrollController,
-              child: Column(
-                children: [
-                 Container(
-  key: heroKey,
-  child: HeroSection(
-    onMenuPressed: () {
-      setState(() {
-        activePageIndex = 1;
-      });
-    },
-  ),
-),
-                  Container(
-  key: aboutKey,
-  child: WhyDunkSection(),
-),
-                  Container(
-  key: menuKey,
-  child: ColdDessertSection(),
-),
-                  PrecisionDemandingSection(),
-                  Container(
-  key: contactKey,
-  child: FooterSection(
-    onGalleryPressed: () {
-      setState(() {
-        activePageIndex = 2;
-      });
-    },
-
-    onHomePressed: () {
-      setState(() {
-        activePageIndex = 0;
-      });
-
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        scrollTo(heroKey);
-      });
-    },
-
-   onMenuPressed: () {
-  setState(() {
-    activePageIndex = 1;
-  });
-},
-
-    onAboutPressed: () {
-      setState(() {
-        activePageIndex = 0;
-      });
-
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        scrollTo(aboutKey);
-      });
-    },
-
-   onContactPressed: () {
-  setState(() {
-    activePageIndex = 3;
-  });
-},
-  ),
-),
-                ],
-              ),
-            )
-          : activePageIndex == 1
-              ? SingleChildScrollView(
-                  child: const FullMenuPage(),
-                )
-              : activePageIndex == 2
-                  ? const SingleChildScrollView(
-                      child: SocialGallerySection(),
-                    )
-                  : const SingleChildScrollView(
-                      child: ContactPage(),
+        body: activePageIndex == 0
+            ? SingleChildScrollView(
+                controller: _scrollController,
+                child: Column(
+                  children: [
+                    Container(
+                      key: heroKey,
+                      child: HeroSection(
+                        onMenuPressed: () => _openPage(1),
+                      ),
                     ),
-    );
+                    Container(
+                      key: aboutKey,
+                      child: WhyDunkSection(),
+                    ),
+                    Container(
+                      key: menuKey,
+                      child: ColdDessertSection(),
+                    ),
+                    PrecisionDemandingSection(),
+                    Container(
+                      key: contactKey,
+                      child: FooterSection(
+                        onGalleryPressed: () => _openPage(2),
+                        onHomePressed: () {
+                          // Zaten Ana Sayfa'dayız (footer sadece
+                          // Ana Sayfa'da gösteriliyor), bu yüzden
+                          // sayfa değiştirmeye gerek yok — sadece
+                          // hero bölümüne kaydır.
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            scrollTo(heroKey);
+                          });
+                        },
+                        onMenuPressed: () => _openPage(1),
+                        onAboutPressed: () {
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            scrollTo(aboutKey);
+                          });
+                        },
+                        onContactPressed: () => _openPage(3),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            : activePageIndex == 1
+                ? SingleChildScrollView(
+                    controller: _scrollController,
+                    child: const FullMenuPage(),
+                  )
+                : activePageIndex == 2
+                    ? const SingleChildScrollView(
+                        child: SocialGallerySection(),
+                      )
+                    : const SingleChildScrollView(
+                        child: ContactPage(),
+                      ),
+        floatingActionButton: activePageIndex == 1
+            ? FloatingActionButton(
+                backgroundColor: AppColors.primaryRed,
+                onPressed: () {
+                  _scrollController.animateTo(
+                    0,
+                    duration: const Duration(milliseconds: 600),
+                    curve: Curves.easeInOut,
+                  );
+                },
+                child: const Icon(Icons.arrow_upward, color: Colors.white),
+              )
+            : null,
+      );
     });
   }
 
@@ -348,11 +368,7 @@ void scrollTo(GlobalKey key) {
         horizontal: 20,
       ),
       child: InkWell(
-        onTap: () {
-          setState(() {
-            activePageIndex = index;
-          });
-        },
+        onTap: () => _openPage(index),
         child: Text(
           title,
           style: TextStyle(
