@@ -6,7 +6,6 @@ import 'package:dunkcoffeeco/widgets/menu_card.dart';
 class FullMenuPage extends StatelessWidget {
   const FullMenuPage({super.key});
 
-  // Her kategori bölümüne kaydırmak için kullanılan anahtarlar.
   static final GlobalKey _coffeeKey = GlobalKey();
   static final GlobalKey _icedKey = GlobalKey();
   static final GlobalKey _drinkKey = GlobalKey();

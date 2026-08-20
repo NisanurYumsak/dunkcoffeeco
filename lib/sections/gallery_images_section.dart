@@ -8,10 +8,8 @@ class GalleryImagesSection extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final isMobile = constraints.maxWidth < 700;
-        // Genişliği, ekrandan yatay padding çıkarıldıktan sonra
-        // kalan kısımla sınırlıyoruz ki tek bir kart bile taşmasın.
         final maxCardWidth = isMobile
-            ? constraints.maxWidth - 40 // 20 sol + 20 sağ padding
+            ? constraints.maxWidth - 40 
             : 580.0;
 
         return Container(

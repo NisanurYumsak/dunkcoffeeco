@@ -19,7 +19,7 @@ class DunkNavbar extends StatelessWidget implements PreferredSizeWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // 1. SOL TARAF: LOGO
+              // LOGO
               const Text(
                 'DUNK COFFEE',
                 style: TextStyle(
@@ -30,7 +30,7 @@ class DunkNavbar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
 
-              // 2. ORTA TARAF: MENÜ LİNKLERİ (sadece geniş ekranda göster)
+              // MENÜ LİNKLERİ (sadece geniş ekranda göster)
               if (!isMobile)
                 Row(
                   children: [
@@ -41,7 +41,7 @@ class DunkNavbar extends StatelessWidget implements PreferredSizeWidget {
                   ],
                 ),
 
-              // 3. SAĞ TARAF: geniş ekranda buton, mobilde hamburger ikonu
+              // geniş ekranda buton, mobilde hamburger ikonu
               if (!isMobile)
                 Container(
                   padding:
@@ -64,7 +64,6 @@ class DunkNavbar extends StatelessWidget implements PreferredSizeWidget {
                 IconButton(
                   icon: const Icon(Icons.menu, color: AppColors.primaryRed),
                   onPressed: () {
-                    // TODO: mobil menüyü (çekmece/drawer) açacak fonksiyon
                   },
                 ),
             ],

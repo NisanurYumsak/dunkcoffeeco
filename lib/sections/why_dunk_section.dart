@@ -45,7 +45,6 @@ class WhyDunkSection extends StatelessWidget {
 
               SizedBox(height: isMobile ? 30 : 60),
 
-              // Wrap: sığmayan kartları otomatik olarak alt satıra kaydırır
               Wrap(
                 alignment: WrapAlignment.center,
                 spacing: 30,

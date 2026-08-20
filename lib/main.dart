@@ -67,8 +67,6 @@ class _DunkCoffeeAppState extends State<DunkCoffeeApp> {
 class DunkMainPage extends StatefulWidget {
   final VoidCallback changeTheme;
   final ThemeMode themeMode;
-  // Bu sayfa Navigator.push ile açıldığında hangi sekmeyle
-  // başlayacağını belirler (0: Ana Sayfa, 1: Menü, 2: Galeri, 3: Bize Ulaşın).
   final int initialIndex;
 
   const DunkMainPage({
@@ -102,23 +100,11 @@ class _DunkMainPageState extends State<DunkMainPage> {
     }
   }
 
-  // ============================================================
-  // Gezinme yardımcıları — gerçek Navigator push/pop kullanır,
-  // böylece hem telefonda hem webde geri tuşu/tarayıcı geri
-  // butonu doğru şekilde bir önceki sekmeye döner.
-  // ============================================================
-
-  // Ana Sayfa'ya dönmek: yeni bir sayfa açmak yerine, geçmişte
-  // zaten var olan ilk (kök) sayfaya geri dön. Böylece "Ana
-  // Sayfa" geçmişte tekrar tekrar birikmez.
   void _goHome() {
     if (activePageIndex == 0) return;
     Navigator.of(context).popUntil((route) => route.isFirst);
   }
 
-  // Menü / Galeri / Bize Ulaşın gibi diğer sekmelere geçmek:
-  // yeni bir sayfa (route) push et, böylece geri tuşu/tarayıcı
-  // geri butonu bir önceki sekmeye dönebilir.
   void _openPage(int index) {
     if (index == 0) {
       _goHome();
@@ -308,10 +294,6 @@ class _DunkMainPageState extends State<DunkMainPage> {
                       child: FooterSection(
                         onGalleryPressed: () => _openPage(2),
                         onHomePressed: () {
-                          // Zaten Ana Sayfa'dayız (footer sadece
-                          // Ana Sayfa'da gösteriliyor), bu yüzden
-                          // sayfa değiştirmeye gerek yok — sadece
-                          // hero bölümüne kaydır.
                           WidgetsBinding.instance.addPostFrameCallback((_) {
                             scrollTo(heroKey);
                           });

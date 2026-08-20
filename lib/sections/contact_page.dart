@@ -14,9 +14,6 @@ class ContactPage extends StatelessWidget {
     "https://www.google.com/maps/search/?api=1&query=Dunk+Coffee+Co&query_place_id=ChIJR05Q_nQhyxQRnlKU-UoxCmE",
   );
 
-  // Google'da doğrudan "yorum yaz" ekranını açan link.
-  // YOUR_PLACE_ID kısmını işletmenizin gerçek Google Place ID'siyle
-  // değiştirin. Place ID'yi şuradan bulabilirsiniz:
   // https://developers.google.com/maps/documentation/places/web-service/place-id
   static final Uri _reviewUri = Uri.parse(
     "https://search.google.com/local/writereview?placeid=ChIJR05Q_nQhyxQRnlKU-UoxCmE",
@@ -41,12 +38,6 @@ class ContactPage extends StatelessWidget {
     );
   }
 
-  // ============================================================
-  // HERO — koyu bordo zemin, solda başlık/CTA, sağda kemer
-  // (arch) şeklinde çerçevede fotoğraf.
-  // Fotoğrafı değiştirmek için sadece asset yolunu güncelleyin:
-  // assets/images/dunkbahce.png
-  // ============================================================
   Widget _buildHero(BuildContext context, bool isMobile) {
     final textColumn = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,7 +134,6 @@ class ContactPage extends StatelessWidget {
       ],
     );
 
-    // Kemer (arch) şeklinde foto çerçevesi.
     final archPhoto = Stack(
       clipBehavior: Clip.none,
       children: [
@@ -174,7 +164,6 @@ class ContactPage extends StatelessWidget {
             ),
           ),
         ),
-        // Dekoratif rozet.
         Positioned(
           top: 18,
           right: -14,
@@ -328,9 +317,7 @@ class ContactPage extends StatelessWidget {
     );
   }
 
-  // ============================================================
-  // Müşteri yorumları — 3 kart, gerçek kullanıcı yorumları.
-  // ============================================================
+  // Müşteri yorumları
   Widget _buildTestimonials(BuildContext context, bool isMobile) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
@@ -420,9 +407,7 @@ class ContactPage extends StatelessWidget {
     );
   }
 
-  // ============================================================
-  // İletişim bilgileri + harita.
-  // ============================================================
+  // İletişim bilgileri + harita
   Widget _buildContactSection(BuildContext context, bool isMobile) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
@@ -595,11 +580,6 @@ class ContactPage extends StatelessWidget {
   }
 }
 
-// ============================================================
-// Tek bir müşteri yorumu kartı. Metin belirli bir uzunluğu
-// aşarsa kısaltılıp sonuna "…devamını gör" eklenir; tıklanınca
-// yorumun tamamı açılır.
-// ============================================================
 class _TestimonialCard extends StatefulWidget {
   const _TestimonialCard({
     required this.text,
