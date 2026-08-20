@@ -11,7 +11,7 @@ class ContactPage extends StatelessWidget {
   static const String _hours = "Her Gün 09:00 - 00:00";
 
   static final Uri _mapsUri = Uri.parse(
-    "https://www.google.com/maps/search/?api=1&query=40.79728814304412,29.435331540585548",
+    "https://www.google.com/maps/search/?api=1&query=Dunk+Coffee+Co&query_place_id=ChIJR05Q_nQhyxQRnlKU-UoxCmE",
   );
 
   // Google'da doğrudan "yorum yaz" ekranını açan link.
