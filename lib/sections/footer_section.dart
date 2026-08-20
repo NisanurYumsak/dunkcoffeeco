@@ -176,7 +176,7 @@ class FooterSection extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
              onTap: () async {
   final uri = Uri.parse(
-    "https://www.google.com/maps/search/?api=1&query=Dunk+Coffee+Gebze",
+    "https://www.google.com/maps/search/?api=1&query=40.79728814304412,29.435331540585548",
   );
 
   await launchUrl(

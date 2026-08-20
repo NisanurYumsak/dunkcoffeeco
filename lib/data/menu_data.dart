@@ -11,7 +11,7 @@ const List<MenuItem> menuItems = [
     price: "200₺",
     category: "coffee",
     badge: "☕ Klasik",
-    image: "",
+    image: "assets/images/espresso.jpg",
   ),
 
   MenuItem(
@@ -22,7 +22,7 @@ const List<MenuItem> menuItems = [
     price: "200₺",
     category: "coffee",
     badge: "⭐ Favori",
-    image: "",
+    image: "assets/images/americano.jpg",
   ),
 
   MenuItem(
@@ -33,7 +33,7 @@ const List<MenuItem> menuItems = [
     price: "200₺",
     category: "coffee",
     badge: "☕ Klasik",
-    image: "",
+    image: "assets/images/filtre.jpg",
   ),
 
   MenuItem(
@@ -44,7 +44,7 @@ const List<MenuItem> menuItems = [
     price: "200₺",
     category: "coffee",
     badge: "⭐ En Çok Tercih Edilen",
-    image: "",
+    image: "assets/images/latte.jpg",
   ),
 
   MenuItem(
@@ -55,7 +55,7 @@ const List<MenuItem> menuItems = [
     price: "200₺",
     category: "coffee",
     badge: "❤️ Favori",
-    image: "",
+    image: "assets/images/cappucino.jpg",
   ),
 
   MenuItem(
@@ -66,7 +66,7 @@ const List<MenuItem> menuItems = [
     price: "200₺",
     category: "coffee",
     badge: "⭐",
-    image: "",
+    image: "assets/images/flatwhite.jpg",
   ),MenuItem(
   name: "Cortado",
   description: "Espresso ve dengeli miktarda süt ile hazırlanan yoğun aromalı kahve.",
@@ -75,7 +75,7 @@ const List<MenuItem> menuItems = [
   price: "200₺",
   category: "coffee",
   badge: "☕ Klasik",
-  image: "",
+  image: "assets/images/cortado.jpg",
 ),
 
 MenuItem(
@@ -86,7 +86,7 @@ MenuItem(
   price: "200₺",
   category: "coffee",
   badge: "🍫 Tatlı Sevenlere",
-  image: "",
+  image: "assets/images/mocha.jpg",
 ),
 
 MenuItem(
@@ -97,7 +97,7 @@ MenuItem(
   price: "200₺",
   category: "coffee",
   badge: "❤️ Favori",
-  image: "",
+  image: "assets/images/whitemocha.jpg",
 ),
 
 MenuItem(
@@ -108,7 +108,7 @@ MenuItem(
   price: "200₺",
   category: "coffee",
   badge: "⭐ En Çok Tercih Edilen",
-  image: "",
+  image: "assets/images/caramelmacc.jpg",
 ),
 
 MenuItem(
@@ -119,7 +119,7 @@ MenuItem(
   price: "200₺",
   category: "coffee",
   badge: "🇹🇷 Geleneksel",
-  image: "",
+  image: "assets/images/turkkahve.jpg",
 ),MenuItem(
   name: "Ice Latte",
   description: "Buz üzerinde servis edilen yumuşak içimli latte.",
@@ -128,7 +128,7 @@ MenuItem(
   price: "200₺",
   category: "iced",
   badge: "❄️ Serinletici",
-  image: "",
+  image: "assets/images/icelatte.jpg",
 ),
 
 MenuItem(
@@ -139,7 +139,7 @@ MenuItem(
   price: "200₺",
   category: "iced",
   badge: "🧊 Klasik",
-  image: "",
+  image: "assets/images/iceamericano.jpg",
 ),
 
 MenuItem(
@@ -150,7 +150,7 @@ MenuItem(
   price: "200₺",
   category: "iced",
   badge: "🍫 Favori",
-  image: "",
+  image: "assets/images/icemocha.jpg",
 ),
 
 MenuItem(
@@ -161,7 +161,7 @@ MenuItem(
   price: "200₺",
   category: "iced",
   badge: "🤍 Yeni",
-  image: "",
+  image: "assets/images/icewhitemocha.jpg",
 ),
 
 MenuItem(
@@ -172,7 +172,7 @@ MenuItem(
   price: "200₺",
   category: "iced",
   badge: "⭐ En Çok Tercih Edilen",
-  image: "",
+  image: "assets/images/icecaramelmacc.jpg",
 ),MenuItem(
   name: "Berry Hibiscus",
   description: "Hibiscus ve orman meyvelerinin ferahlatıcı uyumu.",
@@ -181,7 +181,7 @@ MenuItem(
   price: "200₺",
   category: "drink",
   badge: "🍓 Yazın Favorisi",
-  image: "",
+  image: "assets/images/berry.jpg",
 ),
 
 MenuItem(
@@ -192,7 +192,7 @@ MenuItem(
   price: "200₺",
   category: "drink",
   badge: "🌿 Ferah",
-  image: "",
+  image: "assets/images/coollime.jpg",
 ),
 
 MenuItem(
@@ -203,7 +203,7 @@ MenuItem(
   price: "200₺",
   category: "drink",
   badge: "💚 Yeni",
-  image: "",
+  image: "assets/images/greenherb.jpg",
 ),
 
 MenuItem(
@@ -214,7 +214,7 @@ MenuItem(
   price: "200₺",
   category: "drink",
   badge: "🍊 Doğal",
-  image: "",
+  image: "assets/images/portakalsuyu.jpg",
 ),MenuItem(
   name: "Zeytinli Kekikli Sandviç",
   description: "Zeytin ve kekik aromasıyla hazırlanan hafif sandviç.",
@@ -223,7 +223,7 @@ MenuItem(
   price: "200₺",
   category: "sandwich",
   badge: "🥪 Hafif",
-  image: "",
+  image: "assets/images/zeytinlikekikli.jpg",
 ),
 
 MenuItem(
@@ -234,7 +234,7 @@ MenuItem(
   price: "200₺",
   category: "sandwich",
   badge: "⭐ Favori",
-  image: "",
+  image: "assets/images/beyazpeynirli.jpg",
 ),
 
 MenuItem(
@@ -245,7 +245,7 @@ MenuItem(
   price: "200₺",
   category: "sandwich",
   badge: "🔥 Özel",
-  image: "",
+  image: "assets/images/rustik.jpg",
 ),
 
 MenuItem(
@@ -256,7 +256,7 @@ MenuItem(
   price: "200₺",
   category: "sandwich",
   badge: "🥖 Klasik",
-  image: "",
+  image: "assets/images/baget.jpg",
 ),
 
 MenuItem(
@@ -267,7 +267,7 @@ MenuItem(
   price: "200₺",
   category: "sandwich",
   badge: "🥐 En Çok Tercih Edilen",
-  image: "",
+  image: "assets/images/kruvasansand.jpg",
 ),MenuItem(
   name: "Nutella Muz Çilekli Kruvasan",
   description: "Nutella, muz ve çilekle hazırlanan taze kruvasan.",
@@ -276,7 +276,7 @@ MenuItem(
   price: "200₺",
   category: "dessert",
   badge: "❤️ Favori",
-  image: "",
+  image: "assets/images/meyvelikru.jpg",
 ),
 
 MenuItem(
@@ -287,7 +287,7 @@ MenuItem(
   price: "200₺",
   category: "dessert",
   badge: "🥐 Klasik",
-  image: "",
+  image: "assets/images/rollkru.jpg",
 ),
 
 MenuItem(
@@ -298,7 +298,7 @@ MenuItem(
   price: "200₺",
   category: "dessert",
   badge: "🇫🇷 Premium",
-  image: "",
+  image: "assets/images/cremebrule.jpg",
 ),
 
 MenuItem(
@@ -309,7 +309,7 @@ MenuItem(
   price: "200₺",
   category: "dessert",
   badge: "🍓 Favori",
-  image: "",
+  image: "assets/images/magnolia.jpg",
 ),
 
 MenuItem(
@@ -320,7 +320,7 @@ MenuItem(
   price: "200₺",
   category: "dessert",
   badge: "☕ Klasik",
-  image: "",
+  image: "assets/images/tiramisu.jpg",
 ),MenuItem(
   name: "Triple Chocolate Cookie",
   description: "Yoğun çikolata parçacıklarıyla hazırlanan yumuşak kurabiye.",
@@ -329,7 +329,7 @@ MenuItem(
   price: "200₺",
   category: "dessert",
   badge: "🍪 Favori",
-  image: "",
+  image: "assets/images/triplechoco.jpg",
 ),
 
 MenuItem(
@@ -340,7 +340,7 @@ MenuItem(
   price: "200₺",
   category: "dessert",
   badge: "🇵🇹 Premium",
-  image: "",
+  image: "assets/images/nata.jpg",
 ),
 
 MenuItem(
@@ -362,7 +362,7 @@ MenuItem(
   price: "200₺",
   category: "dessert",
   badge: "🍓 Favori",
-  image: "",
+  image: "assets/images/crumble.jpg",
 ),
 
 MenuItem(
@@ -373,7 +373,7 @@ MenuItem(
   price: "200₺",
   category: "dessert",
   badge: "🤍 Tatlı Sevenlere",
-  image: "",
+  image: "assets/images/browniehite.jpg",
 ),
 
 MenuItem(
@@ -384,7 +384,7 @@ MenuItem(
   price: "200₺",
   category: "dessert",
   badge: "❤️ En Çok Tercih Edilen",
-  image: "",
+  image: "assets/images/redvelvet.jpg",
 ),
 
 MenuItem(
@@ -395,7 +395,7 @@ MenuItem(
   price: "200₺",
   category: "dessert",
   badge: "🌴 Özel",
-  image: "",
+  image: "assets/images/ibiza.jpeg",
 ),
 
 MenuItem(
@@ -406,7 +406,7 @@ MenuItem(
   price: "200₺",
   category: "dessert",
   badge: "🍒 Yeni",
-  image: "",
+  image: "assets/images/visnebadem.jpg",
 ),
 
 MenuItem(
@@ -428,6 +428,6 @@ MenuItem(
   price: "200₺",
   category: "dessert",
   badge: "⭐ En Çok Tercih Edilen",
-  image: "",
+  image: "assets/images/lotus.jpg",
 ),
 ];

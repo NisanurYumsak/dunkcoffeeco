@@ -52,13 +52,30 @@ class MenuCard extends StatelessWidget {
                 top: Radius.circular(24),
               ),
             ),
-            child: const Center(
-              child: Icon(
-                Icons.image_outlined,
-                size: 60,
-                color: Colors.white30,
-              ),
-            ),
+            clipBehavior: Clip.antiAlias,
+            child: item.image.isNotEmpty
+                ? Image.asset(
+                    item.image,
+                    width: double.infinity,
+                    height: 220,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return const Center(
+                        child: Icon(
+                          Icons.image_outlined,
+                          size: 60,
+                          color: Colors.white30,
+                        ),
+                      );
+                    },
+                  )
+                : const Center(
+                    child: Icon(
+                      Icons.image_outlined,
+                      size: 60,
+                      color: Colors.white30,
+                    ),
+                  ),
           ),
 
           Padding(
